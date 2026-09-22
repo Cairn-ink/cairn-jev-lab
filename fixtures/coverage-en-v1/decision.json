@@ -1,0 +1,142 @@
+[
+  {
+    "id": "c041",
+    "source": "User: We approved SQLite as the local cache for Project Birch. The remote database remains unchanged.",
+    "candidate": "Project Birch will use SQLite for its local cache.",
+    "expected": "save",
+    "why": "A confirmed and scoped technical decision."
+  },
+  {
+    "id": "c042",
+    "source": "User: We are considering a monthly release train; no decision has been made. Please keep this as an open planning topic.",
+    "candidate": "A monthly release train is under consideration, not approved.",
+    "expected": "save",
+    "why": "A continuing proposal worth retaining with uncertainty."
+  },
+  {
+    "id": "c043",
+    "source": "User: We rejected a rewrite of the billing service because migration risk is too high.",
+    "candidate": "The team rejected a billing-service rewrite due to migration risk.",
+    "expected": "save",
+    "why": "An explicit rejected option and rationale."
+  },
+  {
+    "id": "c044",
+    "source": "User: The architecture review selected a queue between ingestion and processing.",
+    "candidate": "The architecture review selected a queue between ingestion and processing.",
+    "expected": "save",
+    "why": "An adopted architecture choice."
+  },
+  {
+    "id": "c045",
+    "source": "User: We will pilot asynchronous standups for six weeks before deciding whether to adopt them permanently.",
+    "candidate": "The team plans a six-week pilot of asynchronous standups, with permanent adoption undecided.",
+    "expected": "save",
+    "why": "Multi-session trial, not permanent adoption."
+  },
+  {
+    "id": "c046",
+    "source": "User: The board postponed the office move until the lease review is complete.",
+    "candidate": "The office move is postponed pending lease review.",
+    "expected": "save",
+    "why": "Durable project status with condition."
+  },
+  {
+    "id": "c047",
+    "source": "User: Our standing rule is that API removals require a full major-version release.",
+    "candidate": "API removals require a major-version release under the team standing rule.",
+    "expected": "save",
+    "why": "An established governance decision."
+  },
+  {
+    "id": "c048",
+    "source": "User: Email reminders are approved, but SMS reminders are still under discussion.",
+    "candidate": "Email reminders are approved; SMS reminders remain under discussion.",
+    "expected": "save",
+    "why": "Preserves mixed decision states."
+  },
+  {
+    "id": "c049",
+    "source": "User: We selected the Cedar vendor because it supports offline exports, even though it costs more.",
+    "candidate": "Cedar was selected for offline export support despite a higher price.",
+    "expected": "save",
+    "why": "Confirmed choice plus rationale."
+  },
+  {
+    "id": "c050",
+    "source": "User: Let us keep direct file sync as a backup option if the hosted integration fails. It is not our primary plan.",
+    "candidate": "Direct file sync is a contingency if the hosted integration fails.",
+    "expected": "save",
+    "why": "Useful fallback with limited commitment."
+  },
+  {
+    "id": "c051",
+    "source": "User: We might introduce a four-day week; first we need staff feedback.",
+    "candidate": "The company has adopted a four-day week.",
+    "expected": "skip",
+    "why": "Discussion promoted to adoption."
+  },
+  {
+    "id": "c052",
+    "source": "User: We rejected client-side encryption for this prototype, though we may reconsider later.",
+    "candidate": "The prototype uses client-side encryption.",
+    "expected": "skip",
+    "why": "Rejected option recorded as implemented."
+  },
+  {
+    "id": "c053",
+    "source": "Assistant: I suggest hiring a second designer. User: I am not authorizing that hire.",
+    "candidate": "The user authorized hiring a second designer.",
+    "expected": "skip",
+    "why": "Explicit refusal contradicted."
+  },
+  {
+    "id": "c054",
+    "source": "User: A three-month trial is approved. A permanent subscription is not approved.",
+    "candidate": "The team approved a permanent subscription.",
+    "expected": "skip",
+    "why": "Trial approval expanded beyond scope."
+  },
+  {
+    "id": "c055",
+    "source": "User: Both the blue and amber layouts are still candidates. We have no winner.",
+    "candidate": "The amber layout was selected.",
+    "expected": "skip",
+    "why": "Invents a selection among open alternatives."
+  },
+  {
+    "id": "c056",
+    "source": "User: This is a brainstorming list, not a roadmap: translation, billing, and offline mode.",
+    "candidate": "Translation, billing, and offline mode are committed roadmap items.",
+    "expected": "skip",
+    "why": "Brainstorming mistaken for commitment."
+  },
+  {
+    "id": "c057",
+    "source": "User: We agreed to assess the feasibility of satellite offices.",
+    "candidate": "The team agreed to open satellite offices.",
+    "expected": "skip",
+    "why": "Agreement to investigate is not agreement to execute."
+  },
+  {
+    "id": "c058",
+    "source": "User: Hold the elevator for me; I will be there in thirty seconds.",
+    "candidate": "The user wants the elevator held for thirty seconds.",
+    "expected": "skip",
+    "why": "Accurate immediate instruction lacks future usefulness."
+  },
+  {
+    "id": "c059",
+    "source": "User: The committee settled it in the earlier session.",
+    "candidate": "The committee approved the proposed budget.",
+    "expected": "defer",
+    "why": "Neither the earlier decision nor its subject is supplied."
+  },
+  {
+    "id": "c060",
+    "source": "User: I agree to the changes you just described.",
+    "candidate": "The user approved removing the audit log.",
+    "expected": "defer",
+    "why": "The referenced changes are missing."
+  }
+]

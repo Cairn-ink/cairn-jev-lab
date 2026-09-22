@@ -1,0 +1,27 @@
+[
+  {
+    "key": "scope",
+    "name": "Preference & scope",
+    "file": "fixtures/coverage-en-v1/scope.json"
+  },
+  {
+    "key": "actor",
+    "name": "Speaker & attribution",
+    "file": "fixtures/coverage-en-v1/actor.json"
+  },
+  {
+    "key": "decision",
+    "name": "Proposal & decision",
+    "file": "fixtures/coverage-en-v1/decision.json"
+  },
+  {
+    "key": "uncertainty",
+    "name": "Conditions & uncertainty",
+    "file": "fixtures/coverage-en-v1/uncertainty.json"
+  },
+  {
+    "key": "revision",
+    "name": "Updates & corrections",
+    "file": "fixtures/coverage-en-v1/revision.json"
+  }
+]

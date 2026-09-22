@@ -1,0 +1,142 @@
+[
+  {
+    "id": "c081",
+    "source": "User: I used to prefer phone calls. From now on, please contact me by email.",
+    "candidate": "The user now prefers contact by email.",
+    "expected": "save",
+    "why": "Latest explicit preference supersedes the old one."
+  },
+  {
+    "id": "c082",
+    "source": "User: Earlier I said the service was named Comet. Correction: its name is Orbit.",
+    "candidate": "The service is named Orbit.",
+    "expected": "save",
+    "why": "Direct factual correction."
+  },
+  {
+    "id": "c083",
+    "source": "User: We previously deployed on Fridays. Our new recurring deployment day is Wednesday.",
+    "candidate": "The team now deploys on Wednesdays.",
+    "expected": "save",
+    "why": "Current schedule replaces historical practice."
+  },
+  {
+    "id": "c084",
+    "source": "User: The project deadline was June 1. It has officially moved to June 15.",
+    "candidate": "The project deadline is now June 15.",
+    "expected": "save",
+    "why": "Latest confirmed deadline."
+  },
+  {
+    "id": "c085",
+    "source": "User: Tess owned the release checklist until last month; Arun owns it now.",
+    "candidate": "Arun currently owns the release checklist.",
+    "expected": "save",
+    "why": "Time-aware change of responsibility."
+  },
+  {
+    "id": "c086",
+    "source": "User: We discontinued the weekly newsletter, but the monthly digest continues.",
+    "candidate": "The weekly newsletter is discontinued; the monthly digest continues.",
+    "expected": "save",
+    "why": "Selective update preserves unchanged service."
+  },
+  {
+    "id": "c087",
+    "source": "User: My previous request for bullet-only answers no longer applies. Going forward, use connected prose.",
+    "candidate": "The user now prefers connected prose instead of bullet-only answers.",
+    "expected": "save",
+    "why": "Explicit revocation plus replacement."
+  },
+  {
+    "id": "c088",
+    "source": "User: Correct the units in the installation guide: the clearance is 20 millimeters, not 20 centimeters.",
+    "candidate": "The installation guide clearance should be 20 millimeters.",
+    "expected": "save",
+    "why": "Corrected unit without stale value."
+  },
+  {
+    "id": "c089",
+    "source": "User: The prototype used local files. The production system still uses local files; the database migration was cancelled.",
+    "candidate": "The production system still uses local files after the database migration was cancelled.",
+    "expected": "save",
+    "why": "Cancellation explains why previous state persists."
+  },
+  {
+    "id": "c090",
+    "source": "User: Last year, the festival was in June. Starting this year, it will recur every September.",
+    "candidate": "The festival now recurs in September.",
+    "expected": "save",
+    "why": "New recurring time distinguished from history."
+  },
+  {
+    "id": "c091",
+    "source": "User: The old onboarding code was BLUE. It is now GREEN; do not use BLUE.",
+    "candidate": "The current onboarding code is BLUE.",
+    "expected": "skip",
+    "why": "Superseded value recorded as current; synthetic code."
+  },
+  {
+    "id": "c092",
+    "source": "User: I no longer use Evernote; I moved all my active notes to Joplin.",
+    "candidate": "The user currently uses Evernote for active notes.",
+    "expected": "skip",
+    "why": "Stale tool preference contradicts migration."
+  },
+  {
+    "id": "c093",
+    "source": "User: The cancellation was reversed. The workshop will proceed as planned.",
+    "candidate": "The workshop is cancelled.",
+    "expected": "skip",
+    "why": "Ignores the reversal."
+  },
+  {
+    "id": "c094",
+    "source": "User: We moved support hours from weekends to weekdays. Weekend support has ended.",
+    "candidate": "The team offers weekend support.",
+    "expected": "skip",
+    "why": "Obsolete schedule presented as current."
+  },
+  {
+    "id": "c095",
+    "source": "User: The first draft said ten seats; the signed agreement specifies eight.",
+    "candidate": "The signed agreement provides ten seats.",
+    "expected": "skip",
+    "why": "Draft value superseded by authoritative correction."
+  },
+  {
+    "id": "c096",
+    "source": "User: Pat no longer manages the repository. Lee is the new maintainer.",
+    "candidate": "Pat is the current repository maintainer.",
+    "expected": "skip",
+    "why": "Former owner represented as current."
+  },
+  {
+    "id": "c097",
+    "source": "User: Our annual meetup is now online. The old venue booking was cancelled.",
+    "candidate": "The annual meetup will take place at the old venue.",
+    "expected": "skip",
+    "why": "Cancelled location reused as current plan."
+  },
+  {
+    "id": "c098",
+    "source": "User: The temporary access pass expires in five minutes and is only for this visit.",
+    "candidate": "The temporary access pass expires in five minutes.",
+    "expected": "skip",
+    "why": "Accurate but immediate, visit-specific state."
+  },
+  {
+    "id": "c099",
+    "source": "User: The shared document says the cutoff is Monday; the latest email says Tuesday. Neither has been confirmed.",
+    "candidate": "The official cutoff is Tuesday.",
+    "expected": "defer",
+    "why": "Unresolved conflicting sources require deferral."
+  },
+  {
+    "id": "c100",
+    "source": "User: I changed it again; use the latest version from now on.",
+    "candidate": "The new default is the compact layout.",
+    "expected": "defer",
+    "why": "Missing object and replacement value."
+  }
+]

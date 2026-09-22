@@ -1,0 +1,142 @@
+[
+  {
+    "id": "c001",
+    "source": "User: I use a screen reader. In future answers, describe charts in words as well as showing them.",
+    "candidate": "The user wants text descriptions alongside charts in future answers.",
+    "expected": "save",
+    "why": "An explicit continuing accessibility preference."
+  },
+  {
+    "id": "c002",
+    "source": "User: For all future recipes, list quantities in grams rather than cups.",
+    "candidate": "The user prefers recipe quantities in grams.",
+    "expected": "save",
+    "why": "A recurring domain-specific preference."
+  },
+  {
+    "id": "c003",
+    "source": "User: My standard working week is Tuesday through Saturday. Use that when planning my tasks.",
+    "candidate": "The user normally works Tuesday through Saturday.",
+    "expected": "save",
+    "why": "Stable scheduling context, with normality preserved."
+  },
+  {
+    "id": "c004",
+    "source": "User: Whenever we discuss code, show Java examples unless I ask for another language.",
+    "candidate": "The user prefers Java examples by default for coding discussions.",
+    "expected": "save",
+    "why": "Explicit default with an exception."
+  },
+  {
+    "id": "c005",
+    "source": "User: I generally prefer morning train departures, but I can travel later when necessary.",
+    "candidate": "The user generally prefers morning trains but can travel later.",
+    "expected": "save",
+    "why": "A qualified durable preference."
+  },
+  {
+    "id": "c006",
+    "source": "User: For the Atlas repository, keep commit subjects under 60 characters. This is our ongoing convention.",
+    "candidate": "Atlas commit subjects should stay under 60 characters.",
+    "expected": "save",
+    "why": "A persistent project convention."
+  },
+  {
+    "id": "c007",
+    "source": "User: Please avoid emoji in our customer support drafts from now on.",
+    "candidate": "The user wants customer support drafts without emoji.",
+    "expected": "save",
+    "why": "An enduring preference limited to one domain."
+  },
+  {
+    "id": "c008",
+    "source": "User: I keep my reading notes in plain Markdown so I can move them between tools.",
+    "candidate": "The user keeps reading notes in plain Markdown for portability.",
+    "expected": "save",
+    "why": "A reusable workflow fact without universalizing."
+  },
+  {
+    "id": "c009",
+    "source": "User: On weekdays I silence work notifications after 7 p.m.; weekends have no fixed cutoff.",
+    "candidate": "The user silences weekday work notifications after 7 p.m.",
+    "expected": "save",
+    "why": "Correct recurring time scope."
+  },
+  {
+    "id": "c010",
+    "source": "User: Across future tutorials, define unfamiliar abbreviations the first time you use them.",
+    "candidate": "The user wants unfamiliar abbreviations defined on first use in tutorials.",
+    "expected": "save",
+    "why": "An explicit durable explanation preference."
+  },
+  {
+    "id": "c011",
+    "source": "User: Just for this birthday card, make the tone playful.",
+    "candidate": "The user always prefers a playful writing tone.",
+    "expected": "skip",
+    "why": "Expands a one-off request into a permanent preference."
+  },
+  {
+    "id": "c012",
+    "source": "User: I need a taxi to the station in ten minutes.",
+    "candidate": "The user needs a taxi to the station in ten minutes.",
+    "expected": "skip",
+    "why": "Faithful but transient logistics, not long-term context."
+  },
+  {
+    "id": "c013",
+    "source": "User: I prefer dark themes for code editors, but light themes for spreadsheets.",
+    "candidate": "The user prefers dark themes in every application.",
+    "expected": "skip",
+    "why": "Erases a stated domain exception."
+  },
+  {
+    "id": "c014",
+    "source": "User: For this answer only, omit the explanation and give me the number.",
+    "candidate": "The user never wants explanations.",
+    "expected": "skip",
+    "why": "Temporary format request generalized."
+  },
+  {
+    "id": "c015",
+    "source": "User: Our shop closes at 6 p.m. on Sundays and 9 p.m. on weekdays.",
+    "candidate": "The shop closes at 6 p.m. every day.",
+    "expected": "skip",
+    "why": "Changes the time scope."
+  },
+  {
+    "id": "c016",
+    "source": "User: I can read Spanish, but please keep our conversations in English.",
+    "candidate": "The user prefers Spanish replies.",
+    "expected": "skip",
+    "why": "Ability is not a communication preference."
+  },
+  {
+    "id": "c017",
+    "source": "User: I need the window open until the paint dries this afternoon.",
+    "candidate": "The user prefers windows to remain open permanently.",
+    "expected": "skip",
+    "why": "Temporary necessity becomes permanent preference."
+  },
+  {
+    "id": "c018",
+    "source": "User: This meeting has moved to room B for today only.",
+    "candidate": "All future meetings will be held in room B.",
+    "expected": "skip",
+    "why": "Explicitly contradicts the one-day limit."
+  },
+  {
+    "id": "c019",
+    "source": "User: Keep using that format for my reports.",
+    "candidate": "The user prefers a two-column report format.",
+    "expected": "defer",
+    "why": "Referenced format is absent; cannot resolve it."
+  },
+  {
+    "id": "c020",
+    "source": "User: I would like the usual time for future sessions.",
+    "candidate": "The user wants future sessions at 9 a.m.",
+    "expected": "defer",
+    "why": "The usual time is not specified."
+  }
+]

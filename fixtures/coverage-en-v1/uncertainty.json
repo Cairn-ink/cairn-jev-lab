@@ -1,0 +1,142 @@
+[
+  {
+    "id": "c061",
+    "source": "User: If our readership exceeds 500 people, switch the newsletter to a paid delivery service. Until then, keep the current setup.",
+    "candidate": "Switch newsletter delivery services only if readership exceeds 500.",
+    "expected": "save",
+    "why": "Preserves the explicit trigger."
+  },
+  {
+    "id": "c062",
+    "source": "User: I think I work better with instrumental music, but I am still trying it out.",
+    "candidate": "The user tentatively finds instrumental music helpful for work.",
+    "expected": "save",
+    "why": "Useful tentative preference remains tentative."
+  },
+  {
+    "id": "c063",
+    "source": "User: According to the vendor, the printer supports duplex scanning. We have not verified it.",
+    "candidate": "The vendor reports duplex scanning support; the team has not verified it.",
+    "expected": "save",
+    "why": "Preserves source and verification status."
+  },
+  {
+    "id": "c064",
+    "source": "User: Usually choose the cheaper shipping option unless the delivery is urgent.",
+    "candidate": "The user generally prefers cheaper shipping, except for urgent deliveries.",
+    "expected": "save",
+    "why": "Default and exception retained."
+  },
+  {
+    "id": "c065",
+    "source": "User: For public datasets we allow external processing; confidential datasets must stay on our servers.",
+    "candidate": "Confidential datasets must stay on the team servers.",
+    "expected": "save",
+    "why": "A durable conditional data-handling rule."
+  },
+  {
+    "id": "c066",
+    "source": "User: The current estimate for the migration is two to four weeks, not a firm commitment.",
+    "candidate": "The migration is estimated at two to four weeks, without a firm commitment.",
+    "expected": "save",
+    "why": "Range and uncertainty retained."
+  },
+  {
+    "id": "c067",
+    "source": "User: Our monthly archive normally runs on the first Monday, unless that day is a holiday.",
+    "candidate": "The monthly archive normally runs on the first Monday, except holidays.",
+    "expected": "save",
+    "why": "Recurring schedule with exception."
+  },
+  {
+    "id": "c068",
+    "source": "User: Contractors can access the staging environment only after the owner approves their request.",
+    "candidate": "Contractor staging access requires owner approval.",
+    "expected": "save",
+    "why": "Conditional permission remains conditional."
+  },
+  {
+    "id": "c069",
+    "source": "User: We suspect the cache is causing the intermittent bug; it is our working hypothesis, not a confirmed diagnosis.",
+    "candidate": "The cache is a working hypothesis for the intermittent bug, not a confirmed cause.",
+    "expected": "save",
+    "why": "Ongoing debugging context with hypothesis status."
+  },
+  {
+    "id": "c070",
+    "source": "User: I may prefer a compact keyboard, but I want to borrow one before deciding.",
+    "candidate": "The user is considering a compact keyboard and wants to try one first.",
+    "expected": "save",
+    "why": "Tentative preference and next step preserved."
+  },
+  {
+    "id": "c071",
+    "source": "User: We can publish the recording if every participant consents.",
+    "candidate": "The team may publish the recording without participant consent.",
+    "expected": "skip",
+    "why": "Negates the necessary condition."
+  },
+  {
+    "id": "c072",
+    "source": "User: The supplier may deliver by Thursday, but has not confirmed a date.",
+    "candidate": "The supplier guarantees delivery by Thursday.",
+    "expected": "skip",
+    "why": "Possibility changed to guarantee."
+  },
+  {
+    "id": "c073",
+    "source": "User: Never send an invoice automatically unless a manager has approved it.",
+    "candidate": "Invoices should always be sent automatically.",
+    "expected": "skip",
+    "why": "Drops an explicit approval condition."
+  },
+  {
+    "id": "c074",
+    "source": "User: I sometimes enjoy jazz while cooking, but not while reading.",
+    "candidate": "The user always prefers jazz while reading.",
+    "expected": "skip",
+    "why": "Reverses activity scope and strengthens frequency."
+  },
+  {
+    "id": "c075",
+    "source": "User: The estimate is between 12 and 18 hours.",
+    "candidate": "The task will take exactly 12 hours.",
+    "expected": "skip",
+    "why": "Range becomes exact certainty."
+  },
+  {
+    "id": "c076",
+    "source": "User: This fallback is for internal test builds only.",
+    "candidate": "The fallback is approved for customer-facing production builds.",
+    "expected": "skip",
+    "why": "Permission expanded to prohibited context."
+  },
+  {
+    "id": "c077",
+    "source": "User: The policy applies to full-time employees, not volunteers.",
+    "candidate": "The policy applies to all volunteers.",
+    "expected": "skip",
+    "why": "Explicit exception contradicted."
+  },
+  {
+    "id": "c078",
+    "source": "User: The next train might be late; check the platform display right now.",
+    "candidate": "The next train might be late.",
+    "expected": "skip",
+    "why": "Transient travel update rather than durable context."
+  },
+  {
+    "id": "c079",
+    "source": "User: Use the backup only when that condition is met.",
+    "candidate": "Use the backup when traffic exceeds 1,000 requests per minute.",
+    "expected": "defer",
+    "why": "The condition is absent."
+  },
+  {
+    "id": "c080",
+    "source": "User: It seems more suitable, though I do not know for which team yet.",
+    "candidate": "The analytics team tentatively prefers this solution.",
+    "expected": "defer",
+    "why": "The team and referent are unresolved."
+  }
+]

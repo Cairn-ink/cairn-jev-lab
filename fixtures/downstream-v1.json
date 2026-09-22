@@ -1,0 +1,22 @@
+[
+  {"id":"d01","caseId":"c001","question":"When presenting a chart in a future answer, what accompanying format does the user want?","options":["audio only","unknown","text description","no description"],"gold":"text description"},
+  {"id":"d02","caseId":"c006","question":"What is the ongoing commit-subject length convention for Atlas?","options":["under 60 characters","under 120 characters","unknown","exactly 60 characters"],"gold":"under 60 characters"},
+  {"id":"d03","caseId":"c011","question":"What writing tone does the user generally prefer across future tasks?","options":["formal","playful","unknown","terse"],"gold":"unknown"},
+  {"id":"d04","caseId":"c013","question":"What theme does the user prefer for spreadsheets?","options":["dark","light","system default","unknown"],"gold":"light"},
+  {"id":"d05","caseId":"c022","question":"Which editor does the user use for their own work?","options":["unknown","Vim","Emacs","Nano"],"gold":"Emacs"},
+  {"id":"d06","caseId":"c028","question":"Which export format does customer Lumen require for design deliveries?","options":["PDF","PNG","SVG","unknown"],"gold":"SVG"},
+  {"id":"d07","caseId":"c032","question":"Which accommodation does the user prefer?","options":["hotels","camping","hostels","unknown"],"gold":"hotels"},
+  {"id":"d08","caseId":"c036","question":"What infrastructure does the team deploy to?","options":["Kubernetes","serverless functions","unknown","a single virtual machine"],"gold":"a single virtual machine"},
+  {"id":"d09","caseId":"c041","question":"Which technology was approved for Project Birch's local cache?","options":["Redis","unknown","SQLite","PostgreSQL"],"gold":"SQLite"},
+  {"id":"d10","caseId":"c048","question":"What is the current approval status of SMS reminders?","options":["approved","under discussion","rejected","unknown"],"gold":"under discussion"},
+  {"id":"d11","caseId":"c051","question":"Has the company adopted a four-day week?","options":["yes","unknown","no, still considering"],"gold":"no, still considering"},
+  {"id":"d12","caseId":"c055","question":"Which layout has been selected as the winner?","options":["amber","blue","none selected","unknown"],"gold":"none selected"},
+  {"id":"d13","caseId":"c061","question":"What readership threshold triggers switching newsletter delivery services?","options":["at least 500","unknown","more than 500","more than 1000"],"gold":"more than 500"},
+  {"id":"d14","caseId":"c068","question":"What prerequisite is required before a contractor gets staging access?","options":["owner approval","no approval","manager notification only","unknown"],"gold":"owner approval"},
+  {"id":"d15","caseId":"c072","question":"What delivery date has the supplier guaranteed?","options":["Thursday","Friday","unknown","Monday"],"gold":"unknown"},
+  {"id":"d16","caseId":"c075","question":"What duration range was estimated for the task?","options":["exactly 12 hours","12 to 18 hours","18 to 24 hours","unknown"],"gold":"12 to 18 hours"},
+  {"id":"d17","caseId":"c081","question":"Which contact method does the user now prefer?","options":["phone calls","SMS","email","unknown"],"gold":"email"},
+  {"id":"d18","caseId":"c085","question":"Who currently owns the release checklist?","options":["Tess","unknown","Arun","Pat"],"gold":"Arun"},
+  {"id":"d19","caseId":"c091","question":"What is the current onboarding code?","options":["BLUE","GREEN","RED","unknown"],"gold":"GREEN"},
+  {"id":"d20","caseId":"c095","question":"How many seats does the signed agreement specify?","options":["ten","six","unknown","eight"],"gold":"eight"}
+]

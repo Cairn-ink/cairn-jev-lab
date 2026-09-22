@@ -218,6 +218,8 @@ The memory-gate idea was inspired by [jev-memory](https://github.com/NicolasMont
 
 ## What comes next
 
+**The comparative study is now underway:** [baseline results, threshold tradeoffs and the downstream protocol](evidence/comparison-v1/README.md). Completed tables reuse the original 100 Jev responses; live LLM and reader outcomes are reported separately when measured. [Research context](docs/research-directions.md) connects the design to earlier work on memory admission.
+
 The first 100 cases surfaced a useful research question: **when should a memory gate reject a claim, and when should it ask for more evidence?** Our next phase turns that question into testable comparisons:
 
 1. **Sharper decision boundaries.** Use the [20 prepared contrast cases](evidence/boundary-review-v1/README.md) to separate invented details from genuinely unresolved context. The planned study includes blind independent review and records disagreements before model evaluation.

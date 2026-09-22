@@ -141,6 +141,8 @@ All 100 calls completed. Mean response time was **264 ms**, median **246 ms**, p
 
 The preview saved more intended memories, but its handling of missing context did not match our defer rubric. Rejecting an unsupported candidate can also be defensible: the labeling boundary needs independent review. These are AI-authored synthetic labels, not two-human consensus or an independent benchmark. Do not compare this 78% with the earlier 73% as a longitudinal improvement; the datasets differ.
 
+**Post-result label audit:** all ten defer-labeled candidates add unsupported specificity or certainty. Under candidate-level source fidelity, their skips are defensible; this exposes an overlap in our original rubric, not ten established model failures. The original scores remain unchanged. Read the [skip/defer boundary review](docs/decision-boundary.md) for all ten cases, contrasting examples and the limits of this same-author review.
+
 [Full report, confusion matrices and every disagreement](evidence/coverage-en-v1/README.md) · [Frozen rubric](evidence/coverage-en-v1/PROTOCOL.md) · [100-case manifest](fixtures/coverage-en-v1/manifest.json)
 
 Validate the suite with `node scripts/coverage.mjs` (no calls). To repeat with your own key: `node --env-file=.env scripts/coverage.mjs --live` (up to 100 calls, no retries, stop on first error). The ordinary CLI remains bounded to 20 cases; each category file can be used with its `--input` option.

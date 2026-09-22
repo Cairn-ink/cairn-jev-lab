@@ -32,6 +32,8 @@ Apply these rules in order:
 
 A confident negative is enough to skip a candidate even when another dimension is uncertain. Malformed provider output fails the request; it never becomes `save` or a fabricated model judgment.
 
+**Missing context alone does not determine the final outcome.** A candidate that fills an unknown with an unsupported concrete value can be skipped; a faithful but unresolved candidate may defer; a useful, self-contained statement can be saved with its uncertainty intact. Skip rejects this candidate as written, not all future clarification. See the [boundary review and audit of the ten original defer labels](decision-boundary.md). This is a post-result clarification of intent, not a change to the frozen prompts, original labels or measured scores.
+
 The `reason` field is selected by code. It is not a model-generated explanation. The source, candidate and individual answers provide the material for inspection.
 
 ## What the threshold means

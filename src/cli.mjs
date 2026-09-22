@@ -1,28 +1,50 @@
-import { readFile, mkdir, writeFile } from 'node:fs/promises';
+import { readFile, mkdir, writeFile, stat } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
+import { parseArgs } from 'node:util';
 import { fileURLToPath } from 'node:url';
 import { resolve, join } from 'node:path';
-import { buildRequest, decide, policy, questions } from './gate.mjs';
-import { evaluate } from './jev.mjs';
+import { policy, questions } from './gate.mjs';
+import { judgeMemory } from './index.mjs';
+import { parseCases } from './cases.mjs';
+import { summarize, renderReport } from './report.mjs';
 
-const args = process.argv.slice(2);
-const live = args.includes('--live');
-const limitFlag = args.indexOf('--limit');
-const limit = limitFlag < 0 ? 20 : Number(args[limitFlag + 1]);
-const known = new Set(['--live', '--limit', ...(limitFlag >= 0 ? [args[limitFlag + 1]] : [])]);
-if (args.some(arg => !known.has(arg)) || !Number.isSafeInteger(limit) || limit < 1 || limit > 20) {
-  console.error('Usage: node src/cli.mjs [--live] [--limit 1..20]'); process.exit(1);
+const help = `Usage: node src/cli.mjs [--live] [--input path.json] [--limit 1..20]
+
+Default: preview 20 English development cases without network calls.
+  --input  JSON array of 1–20 cases; id, source, candidate, optional expected/why.
+  --limit  Maximum cases to evaluate; default 20. One request per case, no retries.
+  --live   Send cases to TypeSafe using TYPESAFE_API_KEY; API charges may apply.
+  --help   Show this help.
+
+Reports are written to runs/<timestamp>/. Personal cases belong in local-cases/.`;
+let options;
+try {
+  options = parseArgs({ options: {
+    live: { type: 'boolean', default: false }, help: { type: 'boolean', default: false },
+    input: { type: 'string' }, limit: { type: 'string', default: '20' }
+  }, allowPositionals: false }).values;
+} catch { console.error(help); process.exit(1); }
+if (options.help) { console.log(help); process.exit(0); }
+const limit = Number(options.limit);
+if (!Number.isSafeInteger(limit) || limit < 1 || limit > 20) {
+  console.error(help); process.exit(1);
 }
 const root = fileURLToPath(new URL('../', import.meta.url));
-const fixtures = await readFile(join(root, 'fixtures/cases.json'), 'utf8');
-const cases = JSON.parse(fixtures).slice(0, limit);
+const inputPath = options.input ? resolve(options.input) : join(root, 'fixtures/english.json');
+let fixtures, cases;
+try {
+  if ((await stat(inputPath)).size > 200000) throw new Error('input_too_large');
+  fixtures = await readFile(inputPath, 'utf8');
+  cases = parseCases(fixtures).slice(0, limit);
+} catch (error) {
+  const code = /^(invalid_json|input_too_large|invalid_case_count|invalid_case|invalid_expected|invalid_why)$/.test(error.message)
+    ? error.message : 'input_unreadable';
+  console.error(`${code}: see docs/testing.md for the input format.`); process.exit(1);
+}
 const model = process.env.JEV_MODEL || 'jev-latest';
-if (!live) {
+if (!options.live) {
   console.log('PREVIEW ONLY — no API calls. Expected labels are human-authored, not Jev results.');
-  for (const item of cases) {
-    buildRequest(item, model);
-    console.log(`${item.id} expected=${item.expected} | ${item.candidate}`);
-  }
+  for (const item of cases) console.log(`${item.id} expected=${item.expected ?? 'unlabeled'} | ${item.candidate}`);
   process.exit(0);
 }
 if (!process.env.TYPESAFE_API_KEY || process.env.TYPESAFE_API_KEY === 'replace_locally') {
@@ -33,18 +55,24 @@ const dir = resolve(root, 'runs', stamp);
 await mkdir(dir, { recursive: true });
 const hash = text => createHash('sha256').update(text).digest('hex');
 const report = {
-  kind: 'synthetic-development-pilot', startedAt: new Date().toISOString(), requestedModel: model,
+  kind: options.input ? 'user-supplied-development-evaluation' : 'synthetic-english-development-pilot',
+  startedAt: new Date().toISOString(), requestedModel: model,
   policy, fixtureSha256: hash(fixtures), questionsSha256: hash(JSON.stringify(questions)),
   questions, plannedCalls: cases.length, attemptedCalls: 0, completed: false, results: []
 };
-await writeFile(join(dir, 'report.json'), JSON.stringify(report, null, 2));
+const save = async () => {
+  report.summary = summarize(report.results);
+  await writeFile(join(dir, 'report.json'), JSON.stringify(report, null, 2));
+  await writeFile(join(dir, 'report.md'), renderReport(report));
+};
+await save();
 for (const item of cases) {
   report.attemptedCalls++;
   try {
-    const result = await evaluate(item, { apiKey: process.env.TYPESAFE_API_KEY, model });
-    const verdict = decide(result.answers);
-    report.results.push({ ...item, ...result, ...verdict, matchesExpected: verdict.decision === item.expected });
-    console.log(`${item.id} ${verdict.decision} / expected ${item.expected} / ${result.latencyMs}ms`);
+    const result = await judgeMemory(item, { apiKey: process.env.TYPESAFE_API_KEY, model });
+    report.results.push({ ...item, ...result,
+      ...(item.expected === undefined ? {} : { matchesExpected: result.decision === item.expected }) });
+    console.log(`${item.id} ${result.decision} / expected ${item.expected ?? 'unlabeled'} / ${result.latencyMs}ms`);
   } catch (error) {
     const code = /^(missing_api_key|invalid_case|invalid_answers|network_or_timeout|invalid_provider_response|provider_http_\d{3})$/.test(error.message)
       ? error.message : 'evaluation_failed';
@@ -52,22 +80,10 @@ for (const item of cases) {
     console.error(`${item.id} ${code}; stopped, no automatic retries.`);
     process.exitCode = 1;
   }
-  await writeFile(join(dir, 'report.json'), JSON.stringify(report, null, 2));
+  await save();
   if (process.exitCode) break;
 }
-const valid = report.results.filter(r => !r.error);
-report.completed = valid.length === cases.length;
-report.summary = {
-  evaluated: valid.length, matched: valid.filter(r => r.matchesExpected).length,
-  falseSaves: valid.filter(r => r.decision === 'save' && r.expected !== 'save').length,
-  missedSaves: valid.filter(r => r.decision !== 'save' && r.expected === 'save').length,
-  deferred: valid.filter(r => r.decision === 'defer').length,
-  meanLatencyMs: valid.length ? Math.round(valid.reduce((n, r) => n + r.latencyMs, 0) / valid.length) : null,
-  inputTokens: valid.every(r => r.usage.input_tokens !== null) ? valid.reduce((n, r) => n + r.usage.input_tokens, 0) : null,
-  outputTokens: valid.every(r => r.usage.output_tokens !== null) ? valid.reduce((n, r) => n + r.usage.output_tokens, 0) : null
-};
-await writeFile(join(dir, 'report.json'), JSON.stringify(report, null, 2));
-const rows = report.results.map(r => `| ${r.id} | ${r.expected} | ${r.decision ?? r.error} | ${r.matchesExpected === undefined ? '—' : r.matchesExpected ? 'yes' : 'no'} | ${r.latencyMs ?? '—'} |`);
-await writeFile(join(dir, 'report.md'), `# Jev memory admission pilot\n\nSynthetic development cases; not a held-out benchmark, comparison with Cairn, or proof of production quality. No memory database was changed.\n\nStarted: ${report.startedAt}\n\nPolicy: ${policy.version}; confidence threshold: ${policy.minConfidence} (experimental, not calibrated on memory).\n\nMatched ${report.summary.matched}/${valid.length} evaluated; false saves ${report.summary.falseSaves}; missed saves ${report.summary.missedSaves}; deferrals ${report.summary.deferred}.\n\n| Case | Expected | Observed | Match | ms |\n|---|---|---|---|---|\n${rows.join('\n')}\n\nSee report.json for exact questions, sources, candidates, answers, probabilities, model version and token usage. All failed or ambiguous cases are retained.\n`);
+report.completed = report.results.filter(r => !r.error).length === cases.length;
+await save();
 console.log(JSON.stringify(report.summary));
 console.log(`Report: ${dir}`);

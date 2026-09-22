@@ -3,4 +3,5 @@
 !.env.example
 node_modules/
 runs/
+local-cases/
 *.log

@@ -1,28 +1,34 @@
-# 首次實測解讀
+# First live pilot: results and interpretation
 
-2026-09-22，使用官方 TypeSafe API，請求 `jev-latest`，回傳 `jev-1.13.0`。20 次請求、沒有重試；所有案例在呼叫之前已寫好預期答案，沒有把答案送給 Jev。這是首次合成開發案例測試，不是獨立測試集。
+[Home](../../README.md) · [Recorded report](report.md) · [Exact data](report.json) · [繁體中文](../../docs/zh-TW/pilot-2026-09-22.md)
 
-| 指標 | 結果 |
+On September 22, 2026, we made 20 requests to the official TypeSafe API, requesting `jev-latest` and receiving `jev-1.13.0`. There were no retries. Expected labels were written before the calls and were not sent to Jev. These are synthetic development cases, primarily in Traditional Chinese, not a held-out evaluation set.
+
+| Metric | Result |
 |---|---:|
-| 與預期一致 | 13 / 20 |
-| 實際保存 / 略過 / 待定 | 2 / 11 / 7 |
-| 預期保存但未保存 | 7 / 9 |
-| 不該保存但被保存 | 0 / 11 |
-| 平均每次 API 呼叫 | 298 ms |
-| 輸入 tokens | 13,947 |
-| 輸出 tokens（供應商回報） | 2,455 |
+| Matches expected decision | 13 / 20 |
+| Saved / skipped / deferred | 2 / 11 / 7 |
+| Expected to save but not saved | 7 / 9 |
+| Not expected to save but saved | 0 / 11 |
+| Mean request latency | 298 ms |
+| Input tokens | 13,947 |
+| Output tokens reported by the provider | 2,455 |
 
-每題一次 HTTP 請求、三個 Choice 問題。298 ms 包含當次連線及網路時間；首題 750 ms，其餘 220–359 ms。這不是生產負载測試，也沒有與另一個模型對照。用量是 token 計數，未驗證帳單金額。
+Each case made one HTTP request with three Choice questions. Latency includes connection and network time: the first case took 750 ms; the others took 220–359 ms. This is not a production load test or a model comparison. Token counts are recorded; the billed amount has not been verified.
 
-## 學到了什麼
+## What we learned
 
-- 誇大採用、混淆人物、把臨時例外當永久規則等合成案例被攔住。
-- 繁體中文偏好、TypeScript 偏好、深色模式偏好都被判待定。這些案例的選項其實是 supported / durable / preserved，但其中信心不足 0.75。問題可能在門檻、提問或缺少明確 speaker 結構，這次測試無法分離原因。
-- 「專案偏好 pnpm」被判為過度推論，commitment 信心 0.87，因此錯誤略過。高信心也可能選錯。
-- 專案評估中與不確定的偏好是否值得保存，本來就依產品用途而異。這裡的 expected 是此實驗的政策選擇，並非客觀真理。
+- The policy rejected the tested examples of overstated adoption, actor confusion, and temporary exceptions presented as permanent rules.
+- Preferences for Traditional Chinese, TypeScript and dark mode were deferred. Their choices were `supported` / `durable` / `preserved`, but one or more confidence values were below 0.75. Thresholds, question wording or absent speaker structure may contribute; this run cannot isolate the cause.
+- The project preference for pnpm was incorrectly judged `overstated` with confidence 0.87 and skipped. High confidence can still accompany an incorrect choice.
+- Whether ongoing project evaluation or uncertain preferences should be saved depends on the product. The expected labels express this experiment's policy, not universal ground truth.
 
-## 下一步
+## What to try next
 
-保留 admission-v1 和本次全部結果，不為提高分數改寫預期答案。下一個實驗可以明確標記說話者，或比較「只評估長期價值」與目前三問題政策。每次只改一項，再用新案例評估誤收與漏收。
+Keep `admission-v1` and every result from this run. Do not rewrite expected labels to improve the score. A subsequent experiment could identify speakers explicitly or compare durability-only decisions with the current three-question policy. Change one factor at a time and evaluate fresh cases for both false and missed saves.
 
-目前最適合用作旁路評估：顯示建議給人或上游 agent 看，暫不直接攔截 Cairn 的正式寫入。此 repo 沒有串接 Cairn，也沒有碰使用者的記憶資料。
+For now, use the lab alongside an existing system to inspect recommendations. It should not directly control Cairn's production memory writes. This repo is not integrated with Cairn and this run used no user memory data.
+
+## Language and provenance
+
+This interpretation has been translated into English. The [original fixture](../../fixtures/cases.json) and `report.json` retain the exact original inputs and outputs. The new [English development cases](../../fixtures/english.json) are an adaptation and have not been evaluated with Jev. The results above must not be attributed to them.

@@ -4,7 +4,10 @@ permissions:
   contents: read
 jobs:
   test:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -12,3 +15,4 @@ jobs:
           node-version: '22'
       - run: npm test
       - run: npm run preview
+      - run: node src/cli.mjs --input examples/my-cases.json

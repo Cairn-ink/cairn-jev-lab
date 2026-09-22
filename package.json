@@ -3,7 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "A small, source-aware Jev memory admission experiment for Cairn.",
+  "description": "Test what your AI should remember: source-aware memory admission with Jev.",
+  "license": "MIT",
+  "repository": { "type": "git", "url": "https://github.com/Cairn-ink/cairn-jev-lab.git" },
+  "exports": "./src/index.mjs",
   "engines": { "node": ">=22" },
   "scripts": {
     "test": "node --test",

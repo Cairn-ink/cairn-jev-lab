@@ -1,60 +1,161 @@
 # Cairn Jev Lab
 
-用 Jev 試驗一個小問題：**這段內容適不適合成為長期記憶？**
+**Test what your AI should remember.**
 
-Cairn 定義標準，Jev 評估，程式回傳 `save`（保存）、`skip`（略過）、`defer`（待定）。這是獨立實驗，尚未接入 Cairn Memory，不會修改任何記憶資料庫。
+[![Offline checks](https://github.com/Cairn-ink/cairn-jev-lab/actions/workflows/test.yml/badge.svg)](https://github.com/Cairn-ink/cairn-jev-lab/actions/workflows/test.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-## 判斷標準
+[Quick start](#quick-start) · [Bring your own cases](#try-your-own-cases) · [Policy](docs/policy.md) · [Results](evidence/pilot-2026-09-22/notes.md) · [Contributing](CONTRIBUTING.md) · [繁體中文](docs/zh-TW/README.md)
 
-1. **忠於來源**：主體、時間、範圍與不確定性不能被改寫。
-2. **長期有用**：偏好、專案決策、工作規則及有意義的決策歷史。
-3. **保留狀態**：「考慮中」不能變成「已採用」，轉述不能變成本人偏好。
+Cairn Jev Lab is an experimental memory admission evaluator. Give it a source passage and a proposed memory. Jev evaluates the evidence; a small, inspectable policy recommends **save**, **skip**, or **defer**.
 
-每個案例一次 API 呼叫，同時提出三個 Choice 問題。高信心的不支持、過度推論或臨時內容會略過；任何未解的不確定性會待定；三項均通過才保存。門檻暫設 0.75，這是可測的實驗規則，不代表 75% 正確率，也沒有經過 memory 領域校準。文字始終原樣保存於報告，不由 Jev 改寫。
+Use it to test a memory policy before letting it decide what an agent keeps. The lab includes editable cases, a reusable JavaScript entry point, and reports that retain both successful judgments and mistakes. Node.js 22+, no runtime dependencies.
 
-來源缺失不能靠評分補回。`skip` 只表示不收錄這筆候選，不刪除原始對話。未來整合時，使用者明確要求記住的路徑應維持獨立。
+> **Developer preview.** The first live pilot matched 13 of 20 expected decisions and missed 7 of 9 intended saves. Use the lab for evaluation and advisory decisions while the policy is being developed.
 
-## 開始
+## Why this exists
 
-需要 Node.js 22 以上，沒有第三方套件依賴。
+A memory can sound plausible while changing what someone actually said:
+
+| Source | Proposed memory | Intended decision |
+|---|---|---|
+| “I prefer concise answers across conversations.” | “The user prefers concise answers.” | Save |
+| “Use English for this reply.” | “The user always prefers English.” | Skip |
+| “We might try PostgreSQL; nothing is decided.” | “The team adopted PostgreSQL.” | Skip |
+| “Let's do what we discussed earlier.” | “The user approved the original plan.” | Defer |
+
+These are policy examples, not observed model outputs.
+
+This project makes three things inspectable:
+
+- **The standard:** separate source support, future usefulness, and preservation of commitment or uncertainty.
+- **The decision:** retain Jev's choices, probabilities and confidence alongside the deterministic policy reason.
+- **The tradeoff:** count false saves, missed saves and deferrals against your own expected labels, with per-case latency and token usage.
+
+You supply the source and candidate. The lab does not extract memories, rewrite text, store long-term memory, retrieve it, or delete it. A `save` result is a recommendation, not proof that a claim is true.
+
+## Quick start
 
 ```sh
-npm test
-npm run preview
+git clone https://github.com/Cairn-ink/cairn-jev-lab.git
+cd cairn-jev-lab
+node --test
+node src/cli.mjs
 ```
 
-Preview 只顯示人工預期，不呼叫 Jev。20 個案例全為合成文字，主要使用繁體中文，涵蓋偏好、提議、決策、臨時例外、不同人物及來源內指令。
+The preview validates and displays 20 English development cases. It needs no key, installs nothing, and makes no API calls. The npm equivalents are `npm test` and `npm run preview`.
 
-實測：將 `.env.example` 複製為 `.env`，在本機填入 `TYPESAFE_API_KEY`，再執行：
+To run Jev, copy `.env.example` to `.env` and set `TYPESAFE_API_KEY` locally. Then start with the four-case sample:
 
 ```sh
-npm run live -- --limit 20
+node --env-file=.env src/cli.mjs --live --input examples/my-cases.json
 ```
 
-也可以直接使用 repo 外的金鑰檔案：
+Run the full English development set:
 
 ```sh
-node --env-file=/absolute/path/to/.env src/cli.mjs --live --limit 20
+node --env-file=.env src/cli.mjs --live --limit 20
 ```
 
-每次最多 20 次呼叫，序列執行、不自動重試，錯誤時停止並保留部分報告；每次逾時 30 秒。這是呼叫次數上限，不是供應商帳戶的金額上限。即時執行會把案例原文與候選記憶送到 TypeSafe，可能產生 API 費用。預設 `jev-latest`；可用環境變數 `JEV_MODEL` 指定供應商提供的版本，回傳版本也會記錄。
+An existing environment variable works too; omit `--env-file` in that case. To use a key file outside the repo, pass its path to `--env-file`. See [TypeSafe's quick start](https://docs.typesafe.ai/introduction/quickstart) for API access.
 
-## 看結果
+## Try your own cases
 
-首次真實 API 實測（2026-09-22，`jev-1.13.0`）：20 題中 13 題與預期一致，0 筆誤收、7 筆預期保存但未保存，平均每次 298 ms。9 筆預期保存的候選只有 2 筆放行；因此目前規則過於保守，尚不適合直接控制正式記憶寫入。[完整報告](evidence/pilot-2026-09-22/report.md) · [逐題資料](evidence/pilot-2026-09-22/report.json) · [結果解讀](evidence/pilot-2026-09-22/notes.md)。
+Create a JSON array like [examples/my-cases.json](examples/my-cases.json):
 
-每次實測產生 `runs/<timestamp>/report.json` 與 `report.md`，包含問題、資料集雜湊、實際模型版本、每題機率／信心、延遲、token 用量、誤收、漏收與待定數。預期答案不會傳給模型。
+```json
+[
+  {
+    "id": "language-preference",
+    "source": "Please use English in future conversations.",
+    "candidate": "The user prefers English replies.",
+    "expected": "save"
+  }
+]
+```
 
-`runs/` 預設不提交，因為日後可能包含私有測試內容；經人工檢查的合成結果才放進 `evidence/`。`.env` 不提交，金鑰不寫入報告，供應商錯誤本文不印出。
+`expected` is optional. Include it to measure agreement with your policy; leave it out to inspect recommendations. Expected labels and optional `why` notes are never sent to Jev.
 
-這些是開發案例，**不是獨立測試集或品質保證**。保留失敗案例；若調整規則，另存版本並用新案例驗證。不要以高信心當成來源語意已驗證。
+```sh
+node src/cli.mjs --input examples/my-cases.json
+node --env-file=.env src/cli.mjs --live --input examples/my-cases.json
+```
 
-## 與 Cairn 的關係
+Input files contain 1–20 cases. Every case is validated before any API request. See the [input and report guide](docs/testing.md) for limits and metrics. Use `node src/cli.mjs --help` for options.
 
-候選記憶＋來源 → Jev 評估 → 程式套用 admission policy → 將決策交還 Cairn。
+## Use from JavaScript
 
-後續可以把 `src/gate.mjs` 和 `src/jev.mjs` 包成可選 adapter。Cairn 仍負責來源憑證、namespace、版本、明確保存、修正與遺忘；這個實驗不處理取用、取代或淘汰。
+From this checkout:
 
-設計靈感來自 [jev-memory](https://github.com/NicolasMontone/jev-memory) 的記憶關卡；本 repo 為獨立實作，直接使用 [TypeSafe API](https://docs.typesafe.ai/introduction/quickstart)。另見 [Cairn Memory](https://github.com/Cairn-ink/cairn-memory)。
+```js
+import { judgeMemory } from './src/index.mjs';
 
-程式碼採 MIT License。
+const result = await judgeMemory({
+  source: 'We are considering PostgreSQL, but have not decided.',
+  candidate: 'The team has adopted PostgreSQL.'
+}, { apiKey: process.env.TYPESAFE_API_KEY });
+
+console.log(result.decision); // 'save', 'skip', or 'defer'; model-dependent
+console.log(result.reason);   // deterministic policy reason, not generated prose
+console.log(result.answers);  // each judgment with probabilities and confidence
+```
+
+This makes one real API call. The source and candidate are returned unchanged; no memory store is touched. This repo is not published as an npm package. The API is experimental.
+
+## How decisions work
+
+```mermaid
+flowchart LR
+  A[Source + candidate] --> B[Jev: three typed judgments]
+  B --> C[Versioned admission policy]
+  C --> D[Save / Skip / Defer]
+  D --> E[Inspectable local report]
+```
+
+One request asks three independent Choice questions:
+
+| Dimension | Question |
+|---|---|
+| Support | Does the source support the candidate without changing actor, scope, time or certainty? |
+| Durability | Would this information likely help in a future session? |
+| Commitment | Does the candidate preserve proposals, reports, conditions and uncertainty? |
+
+The `admission-v1` policy uses a provisional confidence threshold of `0.75`. A confident negative judgment causes `skip`; remaining uncertain assessments cause `defer`; all three positive, sufficiently confident judgments produce `save`. Confidence is not a guarantee of accuracy. See [the exact rule and its limits](docs/policy.md).
+
+## What we have measured
+
+The [first live pilot](evidence/pilot-2026-09-22/notes.md) used 20 synthetic development cases, primarily in Traditional Chinese, on September 22, 2026. The provider returned `jev-1.13.0`.
+
+| Metric | Observed |
+|---|---:|
+| Matches expected decision | 13 / 20 |
+| Saved / skipped / deferred | 2 / 11 / 7 |
+| False saves | 0 / 11 cases not expected to save |
+| Missed saves | 7 / 9 cases expected to save |
+| Mean request latency | 298 ms |
+
+The policy was too conservative on this small set. These results are not a held-out benchmark, a comparison against Cairn or another model, or a production quality claim. **The new English examples have not been measured with Jev.** Translation changes the input and does not inherit the original results.
+
+[Run report](evidence/pilot-2026-09-22/report.md) · [Exact recorded data](evidence/pilot-2026-09-22/report.json)
+
+## Data, cost and reproducibility
+
+- Live runs send source and candidate text to **TypeSafe** and may incur API charges. Preview and offline tests make no network calls.
+- A run makes at most 20 requests, sequentially, with a 30-second timeout per request and no automatic retries. It stops on the first error and retains the partial report. This is a request limit, not a billing cap.
+- `runs/<timestamp>/` contains `report.json` and `report.md`: inputs, question and fixture hashes, requested and returned model versions, decisions, failures, timing and token usage.
+- `.env`, `runs/`, and the suggested `local-cases/` directory are ignored by Git. Keep personal test data there. Only reviewed synthetic evidence belongs in `evidence/`.
+- Requests default to `jev-latest`. Set `JEV_MODEL` to a provider-supported version for repeatable configuration. A repeated call may still produce different results.
+
+## Project scope
+
+This lab explores the decision **before a memory is admitted**. [Cairn Memory](https://github.com/Cairn-ink/cairn-memory) remains responsible for receipts, storage, namespaces, revisions, corrections and forgetting. No integration is active yet.
+
+The memory-gate idea was inspired by [jev-memory](https://github.com/NicolasMontone/jev-memory). This is an independent implementation focused on source support, an explicit defer outcome, and published evaluation evidence. It calls the [TypeSafe API](https://docs.typesafe.ai/introduction/quickstart) directly.
+
+Next experiments: make speaker attribution explicit, compare a durability-only policy with the current three-question policy, and evaluate fresh cases before proposing a Cairn adapter. Contributions of difficult synthetic cases are welcome; see [CONTRIBUTING.md](CONTRIBUTING.md).
+
+English is the primary documentation language. Translations live in [`docs/zh-TW/`](docs/zh-TW/README.md). Historical source text and recorded results retain their original language.
+
+## License
+
+[MIT](LICENSE). An experimental project by [Cairn](https://github.com/Cairn-ink).

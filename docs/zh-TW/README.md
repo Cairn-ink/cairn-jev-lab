@@ -1,0 +1,61 @@
+# Cairn Jev Lab
+
+**測試你的 AI 應該記住什麼。**
+
+[English / 主要文件](../../README.md) · [首次實測中文解讀](pilot-2026-09-22.md)
+
+這是一個實驗性的記憶收錄評估工具。輸入原文與候選記憶，Jev 評估證據，程式依據明確規則回傳「保存、略過、待定」。適合讓開發者在交給 agent 自動記憶之前，先測試自己的標準。
+
+## 我們提供什麼
+
+- **可檢查的標準**：分別評估忠於來源、長期價值，以及是否保留提議、轉述和不確定性。
+- **可自行測試的案例入口**：提供英文範例，也能加入自己的原文與候選記憶。
+- **可檢視的評估報告**：保留各項選擇、機率、信心、規則原因、延遲、用量與失敗案例。
+
+這個工具不抽取或改寫記憶、不操作資料庫，也沒有直接接入 Cairn Memory。`save` 是收錄建議，不代表事實已驗證。
+
+## 快速開始
+
+需要 Node.js 22 以上；不必安裝第三方套件。
+
+```sh
+git clone https://github.com/Cairn-ink/cairn-jev-lab.git
+cd cairn-jev-lab
+node --test
+node src/cli.mjs
+```
+
+預覽會檢查並列出 20 個英文開發案例，不需要 key，也不呼叫 API。`expected` 是預先寫好的人工預期，並非模型輸出。
+
+將 `.env.example` 複製為 `.env`，在本機填入 `TYPESAFE_API_KEY`，即可執行：
+
+```sh
+node --env-file=.env src/cli.mjs --live --input examples/my-cases.json
+```
+
+這會把來源與候選記憶傳送給 TypeSafe，可能產生 API 費用。一次最多 20 筆，每筆一個請求、30 秒逾時、不自動重試；錯誤時停止並保留部分報告。呼叫次數上限不是帳單金額上限。
+
+## 測試自己的案例
+
+建立 JSON 陣列，每筆有 `id`、`source`、`candidate`。可加 `expected`（`save`、`skip`、`defer`）與 `why` 標記預期原因。沒有預期答案也能評估，但不納入誤收、漏收和符合率。
+
+```sh
+node src/cli.mjs --input examples/my-cases.json
+node --env-file=.env src/cli.mjs --live --input examples/my-cases.json
+```
+
+詳細欄位與限制見 [測試指南](../testing.md)。私人案例建議放在已忽略的 `local-cases/`；報告放在 `runs/`，含有原文，分享前請先檢查。
+
+## 如何判斷
+
+`admission-v1` 暫用 0.75 信心門檻：明確不支持、過度推論或臨時內容會略過；其餘有未解不確定性則待定；三項均以足夠信心通過才建議保存。這是實驗規則，不代表 75% 正確率。完整規則見 [政策文件](../policy.md)。
+
+首次主要使用繁體中文的 20 題實測：13 題符合預期、沒有誤收，但 9 筆預期應保存的內容只放行 2 筆，平均每次約 298 ms。規則目前過於保守，適合先旁路評估。
+
+**新的英文案例尚未進行 Jev 實測。** 原本的中文來源、預期與實測 JSON 保留原樣；翻譯後是不同輸入，不能沿用舊分數。
+
+## 文件與貢獻
+
+英文為主要文件語言，中文 Markdown 放在此目錄，以相互連結切換；目前採手動維護，沒有自動翻譯服務。歡迎提供合成的困難案例，參考 [貢獻指南](../../CONTRIBUTING.md)。
+
+本專案受 [jev-memory](https://github.com/NicolasMontone/jev-memory) 的關卡概念啟發，獨立實作並直接呼叫 TypeSafe API。Cairn Memory 仍負責來源憑證、儲存、版本、修正與遺忘。程式碼採 [MIT License](../../LICENSE)。

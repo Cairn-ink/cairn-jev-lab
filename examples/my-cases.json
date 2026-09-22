@@ -1,0 +1,28 @@
+[
+  {
+    "id": "language-preference",
+    "source": "Please use English in future conversations.",
+    "candidate": "The user prefers English replies.",
+    "expected": "save",
+    "why": "An explicitly stated preference for future conversations."
+  },
+  {
+    "id": "proposal-is-not-adoption",
+    "source": "We might try PostgreSQL for Atlas; nothing has been decided.",
+    "candidate": "Atlas has adopted PostgreSQL.",
+    "expected": "skip",
+    "why": "A proposal must not become an adopted decision."
+  },
+  {
+    "id": "missing-context",
+    "source": "Let's do what we discussed earlier.",
+    "candidate": "The user approved the original plan.",
+    "expected": "defer",
+    "why": "The plan and missing context are not available."
+  },
+  {
+    "id": "unlabeled-example",
+    "source": "I might prefer short answers, but I am still figuring it out.",
+    "candidate": "The user may prefer short answers and is uncertain."
+  }
+]

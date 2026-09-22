@@ -24,4 +24,4 @@ Total usage across these 60 requests: 41658 input and 7362 output tokens, counte
 
 ## Limits
 
-The same team authored and labeled these synthetic cases. Repeating them tests observed consistency, not broader coverage or generalization. Zero false saves on these repeated non-save cases is not a safety guarantee. The strongest next evidence would be independently authored cases with labels agreed before model calls. The landing dashboard is generated from the two exact JSON reports with `node scripts/build-study.mjs`; original evidence remains unchanged.
+The same team authored and labeled these synthetic cases. Repeating them tests observed consistency, not broader coverage or generalization. Zero false saves on these repeated non-save cases is not a safety guarantee. The strongest next evidence would be independently authored cases with labels agreed before model calls. The archived repeatability summary is generated from the two exact JSON reports with `node scripts/build-study.mjs`; original evidence remains unchanged.

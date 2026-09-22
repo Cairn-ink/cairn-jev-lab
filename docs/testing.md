@@ -42,6 +42,8 @@ The separate `fixtures/holdout-en-v1.json` contains 20 fresh English cases evalu
 
 ## Reading a report
 
+The dedicated [100-case coverage suite](../evidence/coverage-en-v1/README.md) is split into five 20-case JSON files for compatibility with the ordinary CLI. Use `node scripts/coverage.mjs` to validate all five without API use, or add `--live` with your own key for the bounded 100-request run. The runner's pre-call hashes and full paired report preserve every attempt. Its labels were AI-authored, not independently human-annotated. This is a separate dataset; do not pool it with the original 20-case reports or treat changes in their headline percentages as a controlled improvement.
+
 Each live run writes `runs/<timestamp>/report.json` and `report.md`. Errors stop the run without automatic retries. Both files are updated after each attempted case, preserving completed results if a later request fails.
 
 | Metric | Definition |

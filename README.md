@@ -11,7 +11,7 @@ Cairn Jev Lab is an experimental memory admission evaluator. Give it a source pa
 
 Use it to test a memory policy before letting it decide what an agent keeps. The lab includes editable cases, a reusable JavaScript entry point, and reports that retain both successful judgments and mistakes. Node.js 22+, no runtime dependencies.
 
-> **Developer preview.** On 20 fresh English cases, the baseline matched 11 expected decisions; an experimental lower threshold matched 15, using the same model responses. It still missed 4 of 10 intended saves. This is a small, team-authored experiment, not a production quality claim.
+> **Developer preview.** On 100 new synthetic English cases, the baseline matched 59 expected decisions; the preview matched 78 using the same responses. Preview still missed 12 of 50 intended saves and skipped all 10 cases labeled defer. Labels were AI-authored without independent human review. This is an experiment, not a production quality claim.
 
 ## Why this exists
 
@@ -126,13 +126,32 @@ The `admission-v1` policy uses a provisional confidence threshold of `0.75`. A c
 
 ## What we have measured
 
+### Latest: 100 distinct English cases
+
+We froze 100 new source/candidate pairs, labels and the evaluation protocol before calls. Five categories cover preferences and scope, speaker attribution, proposals and decisions, conditions and uncertainty, and corrections. Every case was evaluated once with unchanged questions and policies.
+
+| Metric | Baseline: 0.75 | Preview: 0.40 |
+|---|---:|---:|
+| Matches expected decision | 59 / 100 | 78 / 100 |
+| Intended memories saved | 18 / 50 | 38 / 50 |
+| False saves among 50 non-save cases | 0 | 0 |
+| Expected deferrals correctly deferred | 1 / 10 | 0 / 10 |
+
+All 100 calls completed. Mean response time was **264 ms**, median **246 ms**, p95 **346 ms**. These client-observed times include network; they are not a production speed guarantee.
+
+The preview saved more intended memories, but its handling of missing context did not match our defer rubric. Rejecting an unsupported candidate can also be defensible: the labeling boundary needs independent review. These are AI-authored synthetic labels, not two-human consensus or an independent benchmark. Do not compare this 78% with the earlier 73% as a longitudinal improvement; the datasets differ.
+
+[Full report, confusion matrices and every disagreement](evidence/coverage-en-v1/README.md) · [Frozen rubric](evidence/coverage-en-v1/PROTOCOL.md) · [100-case manifest](fixtures/coverage-en-v1/manifest.json)
+
+Validate the suite with `node scripts/coverage.mjs` (no calls). To repeat with your own key: `node --env-file=.env scripts/coverage.mjs --live` (up to 100 calls, no retries, stop on first error). The ordinary CLI remains bounded to 20 cases; each category file can be used with its `--input` option.
+
 ### Repeatability and response time
 
 We subsequently repeated the same English set twice without changing labels, questions or policies: **20 unique cases, three passes, 60 evaluations**. Preview agreement was 15/20, 15/20 and 14/20; pooled agreement was 44/60 versus baseline 33/60. Preview saved 16/30 intended-save observations and missed 14/30. Two cases changed preview decisions across passes. Repeats are correlated observations, not new independent examples.
 
 Mean client-observed response time was **289 ms**, median **271 ms**, and nearest-rank p95 **363 ms**, including all requests and network time. This is not a production speed guarantee. [Full repeatability evidence](evidence/repeat-en-v1/README.md).
 
-The landing page presents these measured results, per-pass comparisons and response times above **Try it yourself**. `node scripts/build-study.mjs` regenerates the dashboard data and repeatability summary from published responses without API calls. Recorded examples work in a static copy of `web/`; new evaluations require the local server and your own key. See [the playground and distribution guide](docs/playground.md).
+The landing page now presents the separate 100-case study, with category comparisons and response times above **Try it yourself**. `node scripts/build-study.mjs` regenerates the latest dashboard and both study summaries from published responses without API calls. The earlier repeatability data remains in `evidence/repeat-en-v1/study.json`. Recorded examples still come from the original English pilot and work in a static copy of `web/`; new evaluations require the local server and your own key. See [the playground and distribution guide](docs/playground.md).
 
 ### Fresh English comparison
 
@@ -170,7 +189,7 @@ The policy was too conservative on this small set. These results are not a held-
 ## Data, cost and reproducibility
 
 - Live runs send source and candidate text to **TypeSafe** and may incur API charges. Preview and offline tests make no network calls.
-- A run makes at most 20 requests, sequentially, with a 30-second timeout per request and no automatic retries. It stops on the first error and retains the partial report. This is a request limit, not a billing cap.
+- An ordinary CLI run makes at most 20 requests; the dedicated coverage runner permits 100 and the repeatability runner 40. Calls are sequential, with a 30-second timeout and no automatic retries. These runners stop on the first error and retain partial reports. These are request limits, not billing caps.
 - `runs/<timestamp>/` contains `report.json` and `report.md`: inputs, question and fixture hashes, requested and returned model versions, decisions, failures, timing and token usage.
 - `.env`, `runs/`, and the suggested `local-cases/` directory are ignored by Git. Keep personal test data there. Only reviewed synthetic evidence belongs in `evidence/`.
 - CLI/library requests default to `jev-latest`; the playground defaults to `jev-1.13.0`. Set `JEV_MODEL` to a provider-supported version for repeatable configuration. A repeated call may still produce different results.

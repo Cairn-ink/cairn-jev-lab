@@ -29,27 +29,27 @@
         <div class="metric-strip">
           <div class="headline-stat"><p>Mean Jev response</p><strong><span id="mean-latency">—</span><small>ms</small></strong><span id="latency-detail">Client-observed request time</span></div>
           <div class="headline-stat"><p>Preview agreement</p><strong><span id="preview-agreement">—</span><small>%</small></strong><span id="agreement-detail">Against our expected labels</span></div>
-          <div class="headline-stat"><p>Intended memories saved</p><strong><span id="saved-count">—</span><small id="saved-total"></small></strong><span id="save-detail">Preview policy · repeated observations</span></div>
-          <div class="headline-stat"><p>English evaluations</p><strong id="evaluation-count">—</strong><span id="sample-detail">Same cases, repeated calls</span></div>
+          <div class="headline-stat"><p>Intended memories saved</p><strong><span id="saved-count">—</span><small id="saved-total"></small></strong><span id="save-detail">Preview policy · unique cases</span></div>
+          <div class="headline-stat"><p>English evaluations</p><strong id="evaluation-count">—</strong><span id="sample-detail">One evaluation per distinct case</span></div>
         </div>
-        <p class="scope-note">Small, team-authored synthetic study. Repeats are not independent examples. These are admission recommendations, not verified facts or stored memories.</p>
+        <p class="scope-note">100 agent-authored synthetic cases; no independent human annotation. These are admission recommendations, not verified facts or stored memories.</p>
       </section>
 
       <section id="findings" class="findings" aria-labelledby="findings-title">
-        <div class="section-intro"><div><span class="eyebrow">The findings</span><h2 id="findings-title">A threshold changes what gets kept.</h2></div><a class="inline-link" href="https://github.com/Cairn-ink/cairn-jev-lab/tree/main/evidence/repeat-en-v1" target="_blank" rel="noreferrer">Read the experiment ↗</a></div>
+        <div class="section-intro"><div><span class="eyebrow">The findings</span><h2 id="findings-title">A threshold changes what gets kept.</h2></div><a class="inline-link" href="https://github.com/Cairn-ink/cairn-jev-lab/tree/main/evidence/coverage-en-v1" target="_blank" rel="noreferrer">Read the experiment ↗</a></div>
         <div class="dashboard-grid">
           <article class="chart-card"><div class="chart-heading"><h3>Same responses. Two policies.</h3><span class="small-label">Matches / 20</span></div>
             <div class="legend"><span><i class="legend-dot baseline"></i>Baseline · 0.75</span><span><i class="legend-dot preview"></i>Preview · 0.40</span></div>
-            <div id="pass-chart" class="pass-chart" aria-label="Agreement by evaluation pass"></div>
+            <div id="pass-chart" class="pass-chart" aria-label="Agreement by scenario category"></div>
             <p class="chart-note" id="variation-note">Loading repeatability results…</p>
           </article>
           <article class="chart-card timing-card"><div class="chart-heading"><h3>Every response time, kept.</h3><span class="small-label">Milliseconds</span></div>
             <div class="timing-summary"><div><strong id="median-latency">—</strong><span>Median</span></div><div><strong id="p95-latency">—</strong><span>95th percentile</span></div><div><strong id="max-latency">—</strong><span>Slowest</span></div></div>
-            <div id="latency-chart" class="latency-chart" role="img" aria-label="Loading response times"></div><div class="chart-axis"><span>Pass 1</span><span>Pass 2</span><span>Pass 3</span></div>
+            <div id="latency-chart" class="latency-chart" role="img" aria-label="Loading response times"></div><div class="chart-axis"><span>First request</span><span>Interleaved categories</span><span>Last request</span></div>
             <p class="chart-note">Includes network time and the first request. No outliers removed. Not a throughput test or speed guarantee.</p>
           </article>
         </div>
-        <div class="limits-strip"><span class="limits-label">What still needs work</span><p id="study-limits">Loading observed limitations…</p><a href="https://github.com/Cairn-ink/cairn-jev-lab/tree/main/evidence/holdout-en-v1" target="_blank" rel="noreferrer">Original 20-case study ↗</a></div>
+        <div class="limits-strip"><span class="limits-label">What still needs work</span><p id="study-limits">Loading observed limitations…</p><a href="https://github.com/Cairn-ink/cairn-jev-lab/tree/main/evidence/repeat-en-v1" target="_blank" rel="noreferrer">Earlier repeatability study ↗</a></div>
       </section>
 
       <section class="method" aria-labelledby="method-title"><div class="method-title"><span class="eyebrow">The standard</span><h2 id="method-title">Three questions.<br>One recommendation.</h2></div><div class="method-item"><span class="method-number">01</span><h3>Supported?</h3><p>Does the original passage actually support the proposed memory?</p></div><div class="method-item"><span class="method-number">02</span><h3>Useful later?</h3><p>Will this matter beyond the current conversation?</p></div><div class="method-item"><span class="method-number">03</span><h3>Faithful?</h3><p>Are proposals, conditions and uncertainty preserved?</p></div></section>

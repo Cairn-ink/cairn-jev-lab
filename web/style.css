@@ -11,3 +11,7 @@ header{height:98px;display:flex;align-items:center;justify-content:space-between
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 @media(min-width:761px) and (max-width:1000px){.hero{padding:42px 0}.field-note blockquote,.candidate-quote{font-size:22px}.field-note blockquote br,.candidate-quote br{display:none}}
 @media(max-width:760px){.field-note{display:none}.hero{padding-bottom:35px}}
+
+/* Category labels replace the three repeated-pass labels in the latest study. */
+.pass-row{grid-template-columns:110px 1fr}.pass-name{font-size:10px;line-height:1.4}.latency-chart{gap:2px}.latency-bar:nth-child(20n){margin-right:0}.latency-bar:last-child{margin:0}.chart-axis{justify-content:space-between}
+@media(max-width:430px){.pass-row{grid-template-columns:92px 1fr;gap:9px}.chart-axis{font-size:9px}}

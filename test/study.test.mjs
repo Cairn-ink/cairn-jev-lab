@@ -7,7 +7,7 @@ import { summarize } from '../src/report.mjs';
 const root = new URL('../', import.meta.url);
 const read = async path => JSON.parse(await readFile(new URL(path, root)));
 test('dashboard metrics and repeat protocol reproduce from published responses, with repeats not counted as unique cases', async () => {
-  const study = await read('web/study.json');
+  const study = await read('evidence/repeat-en-v1/study.json');
   const repeat = await read('evidence/repeat-en-v1/report.json');
   const original = await read('evidence/holdout-en-v1/report.json');
   const hash = value => createHash('sha256').update(value).digest('hex');

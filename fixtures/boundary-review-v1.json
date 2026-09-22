@@ -1,0 +1,102 @@
+[
+  {
+    "id": "b20",
+    "source": "User: Please keep the summary short.",
+    "candidate": "The user wants short summaries."
+  },
+  {
+    "id": "b11",
+    "source": "User: Replace the old review checklist with the revised one in all future design reviews.",
+    "candidate": "Future design reviews should use the revised checklist instead of the old one."
+  },
+  {
+    "id": "b09",
+    "source": "User: By they I mean Ravi. They are now responsible for maintaining the search index.",
+    "candidate": "Ravi is now responsible for maintaining the search index."
+  },
+  {
+    "id": "b10",
+    "source": "User: Replace the old review checklist with the revised one in all future design reviews.",
+    "candidate": "Future design reviews should use a five-item checklist."
+  },
+  {
+    "id": "b02",
+    "source": "User: Use the earlier slot for our recurring planning calls.",
+    "candidate": "Use the earlier slot for recurring planning calls."
+  },
+  {
+    "id": "b13",
+    "source": "User: We may move our community forum to a new provider, but have not approved a migration. This remains an open planning topic.",
+    "candidate": "A community-forum migration is under consideration and has not been approved."
+  },
+  {
+    "id": "b18",
+    "source": "User: Set this cup beside me until I finish drinking it.",
+    "candidate": "The user wants this cup beside them until they finish it."
+  },
+  {
+    "id": "b17",
+    "source": "User: I prefer printed agendas for all future workshops.",
+    "candidate": "The user prefers printed agendas for future workshops."
+  },
+  {
+    "id": "b08",
+    "source": "User: They are now responsible for maintaining the search index.",
+    "candidate": "The previously referenced person now maintains the search index."
+  },
+  {
+    "id": "b19",
+    "source": "User: This week I am experimenting with working in a library. I have no plan yet for whether to continue afterward.",
+    "candidate": "The user is trying library-based work this week and has not decided whether to continue."
+  },
+  {
+    "id": "b07",
+    "source": "User: They are now responsible for maintaining the search index.",
+    "candidate": "Ravi is now responsible for maintaining the search index."
+  },
+  {
+    "id": "b14",
+    "source": "User: We may move our community forum to a new provider, but have not approved a migration. This remains an open planning topic.",
+    "candidate": "The community-forum migration has been approved."
+  },
+  {
+    "id": "b05",
+    "source": "User: Apply that retention rule to all future exports.",
+    "candidate": "Apply the referenced retention rule to all future exports."
+  },
+  {
+    "id": "b04",
+    "source": "User: Apply that retention rule to all future exports.",
+    "candidate": "Delete every export after seven days."
+  },
+  {
+    "id": "b03",
+    "source": "User: The two slots are 2 p.m. and 4 p.m. Use the earlier slot for our recurring planning calls.",
+    "candidate": "Recurring planning calls should start at 2 p.m."
+  },
+  {
+    "id": "b01",
+    "source": "User: Use the earlier slot for our recurring planning calls.",
+    "candidate": "Recurring planning calls should start at 2 p.m."
+  },
+  {
+    "id": "b16",
+    "source": "User: The handbook lists Thursday as the submission day, while the coordinator says Friday. We have not resolved the conflict.",
+    "candidate": "Friday is the confirmed submission day."
+  },
+  {
+    "id": "b15",
+    "source": "User: The handbook lists Thursday as the submission day, while the coordinator says Friday. We have not resolved the conflict.",
+    "candidate": "The submission day is unresolved: the handbook says Thursday and the coordinator says Friday."
+  },
+  {
+    "id": "b06",
+    "source": "User: Our retention rule is to delete an export after seven days. Apply that rule to all future exports.",
+    "candidate": "Delete every export after seven days."
+  },
+  {
+    "id": "b12",
+    "source": "User: The revised review checklist has five items. Replace the old checklist with it in all future design reviews.",
+    "candidate": "Future design reviews should use a five-item checklist."
+  }
+]

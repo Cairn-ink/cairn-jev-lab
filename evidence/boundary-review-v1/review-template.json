@@ -1,0 +1,151 @@
+{
+  "suite": "boundary-review-v1",
+  "fixtureSha256": "2b762df817c0b094fac8dc7fa685a0e241e3da927aa9d9b7d7854298ae16daea",
+  "reviewerAlias": "",
+  "humanReviewed": false,
+  "independentOfOtherReviewers": false,
+  "modelOutputsSeen": false,
+  "publishPermission": false,
+  "items": [
+    {
+      "id": "b20",
+      "decision": null,
+      "reason": "",
+      "rubricAmbiguous": false,
+      "ambiguityNote": ""
+    },
+    {
+      "id": "b11",
+      "decision": null,
+      "reason": "",
+      "rubricAmbiguous": false,
+      "ambiguityNote": ""
+    },
+    {
+      "id": "b09",
+      "decision": null,
+      "reason": "",
+      "rubricAmbiguous": false,
+      "ambiguityNote": ""
+    },
+    {
+      "id": "b10",
+      "decision": null,
+      "reason": "",
+      "rubricAmbiguous": false,
+      "ambiguityNote": ""
+    },
+    {
+      "id": "b02",
+      "decision": null,
+      "reason": "",
+      "rubricAmbiguous": false,
+      "ambiguityNote": ""
+    },
+    {
+      "id": "b13",
+      "decision": null,
+      "reason": "",
+      "rubricAmbiguous": false,
+      "ambiguityNote": ""
+    },
+    {
+      "id": "b18",
+      "decision": null,
+      "reason": "",
+      "rubricAmbiguous": false,
+      "ambiguityNote": ""
+    },
+    {
+      "id": "b17",
+      "decision": null,
+      "reason": "",
+      "rubricAmbiguous": false,
+      "ambiguityNote": ""
+    },
+    {
+      "id": "b08",
+      "decision": null,
+      "reason": "",
+      "rubricAmbiguous": false,
+      "ambiguityNote": ""
+    },
+    {
+      "id": "b19",
+      "decision": null,
+      "reason": "",
+      "rubricAmbiguous": false,
+      "ambiguityNote": ""
+    },
+    {
+      "id": "b07",
+      "decision": null,
+      "reason": "",
+      "rubricAmbiguous": false,
+      "ambiguityNote": ""
+    },
+    {
+      "id": "b14",
+      "decision": null,
+      "reason": "",
+      "rubricAmbiguous": false,
+      "ambiguityNote": ""
+    },
+    {
+      "id": "b05",
+      "decision": null,
+      "reason": "",
+      "rubricAmbiguous": false,
+      "ambiguityNote": ""
+    },
+    {
+      "id": "b04",
+      "decision": null,
+      "reason": "",
+      "rubricAmbiguous": false,
+      "ambiguityNote": ""
+    },
+    {
+      "id": "b03",
+      "decision": null,
+      "reason": "",
+      "rubricAmbiguous": false,
+      "ambiguityNote": ""
+    },
+    {
+      "id": "b01",
+      "decision": null,
+      "reason": "",
+      "rubricAmbiguous": false,
+      "ambiguityNote": ""
+    },
+    {
+      "id": "b16",
+      "decision": null,
+      "reason": "",
+      "rubricAmbiguous": false,
+      "ambiguityNote": ""
+    },
+    {
+      "id": "b15",
+      "decision": null,
+      "reason": "",
+      "rubricAmbiguous": false,
+      "ambiguityNote": ""
+    },
+    {
+      "id": "b06",
+      "decision": null,
+      "reason": "",
+      "rubricAmbiguous": false,
+      "ambiguityNote": ""
+    },
+    {
+      "id": "b12",
+      "decision": null,
+      "reason": "",
+      "rubricAmbiguous": false,
+      "ambiguityNote": ""
+    }
+  ]
+}

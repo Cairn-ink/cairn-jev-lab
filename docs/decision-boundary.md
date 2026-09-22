@@ -68,6 +68,8 @@ This clarifies the intent of the existing negative-first code order. It does not
 
 ## Next validation
 
+The [20-pair human review packet](../evidence/boundary-review-v1/README.md) is now prepared without expected labels or model calls. It is awaiting human review; it is not completed independent validation.
+
 Use contrast sets like the examples above: same source with an invented detail versus a preserved unknown, then the same candidate with the missing context supplied. Include faithful uncertain statements, clearly temporary content and ambiguous durability. Freeze intended labels before new calls and have independent reviewers annotate them without seeing model output; record disagreements rather than forcing unanimous labels.
 
 If product requirements call for clarification whenever a reference is absent, model that as a separate host action such as “request context,” which can coexist with rejecting the current wording. Do not overload `defer` to mean both “uncertain assessment” and “the user could provide more information.” This document proposes that separation; no new field or host integration is implemented.

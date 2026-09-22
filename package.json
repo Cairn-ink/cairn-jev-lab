@@ -1,0 +1,13 @@
+{
+  "name": "cairn-jev-lab",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A small, source-aware Jev memory admission experiment for Cairn.",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "test": "node --test",
+    "preview": "node src/cli.mjs",
+    "live": "node --env-file=.env src/cli.mjs --live"
+  }
+}

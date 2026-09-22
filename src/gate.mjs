@@ -1,4 +1,10 @@
 export const policy = Object.freeze({ version: 'admission-v1', minConfidence: 0.75 });
+export const previewPolicy = Object.freeze({ version: 'admission-v2-preview', minConfidence: 0.4 });
+export const policies = Object.freeze({ [policy.version]: policy, [previewPolicy.version]: previewPolicy });
+export function getPolicy(name = policy.version) {
+  if (!Object.hasOwn(policies, name)) throw new Error('invalid_policy');
+  return policies[name];
+}
 
 // These are experimental product criteria, not a claim of calibrated correctness.
 export const questions = {
@@ -58,9 +64,11 @@ export function validateAnswers(input) {
   return answers;
 }
 
-export function decide(input) {
+export function decide(input, decisionPolicy = policy) {
+  if (!Number.isFinite(decisionPolicy?.minConfidence) || decisionPolicy.minConfidence < 0 || decisionPolicy.minConfidence > 1)
+    throw new Error('invalid_policy');
   const answers = validateAnswers(input);
-  const confident = name => answers[name].confidence >= policy.minConfidence;
+  const confident = name => answers[name].confidence >= decisionPolicy.minConfidence;
   if (confident('support') && answers.support.choice === 'unsupported')
     return { decision: 'skip', reason: 'unsupported_candidate' };
   if (confident('commitment') && answers.commitment.choice === 'overstated')

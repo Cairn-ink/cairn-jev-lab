@@ -1,0 +1,1122 @@
+{
+  "kind": "offline-development-replay",
+  "apiCalls": 0,
+  "sourceReportSha256": "c637815564ce7eba15d9b97a7ac00ce22aea70917652c618951e29cb255e84bb",
+  "results": [
+    {
+      "minConfidence": 0,
+      "summary": {
+        "evaluated": 20,
+        "errors": 0,
+        "labeledEvaluated": 20,
+        "matched": 16,
+        "expectedSaves": 9,
+        "falseSaves": 0,
+        "missedSaves": 3,
+        "saved": 6,
+        "skipped": 13,
+        "deferred": 1,
+        "meanLatencyMs": 298,
+        "inputTokens": 13947,
+        "outputTokens": 2455
+      },
+      "cases": [
+        {
+          "id": "01",
+          "expected": "save",
+          "decision": "save",
+          "reason": "supported_durable_faithful"
+        },
+        {
+          "id": "02",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "03",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "04",
+          "expected": "save",
+          "decision": "save",
+          "reason": "supported_durable_faithful"
+        },
+        {
+          "id": "05",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "06",
+          "expected": "save",
+          "decision": "save",
+          "reason": "supported_durable_faithful"
+        },
+        {
+          "id": "07",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "08",
+          "expected": "save",
+          "decision": "save",
+          "reason": "supported_durable_faithful"
+        },
+        {
+          "id": "09",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "overstated_candidate"
+        },
+        {
+          "id": "10",
+          "expected": "save",
+          "decision": "save",
+          "reason": "supported_durable_faithful"
+        },
+        {
+          "id": "11",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "12",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "13",
+          "expected": "save",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "14",
+          "expected": "defer",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "15",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "16",
+          "expected": "save",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "17",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "18",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "19",
+          "expected": "save",
+          "decision": "save",
+          "reason": "supported_durable_faithful"
+        },
+        {
+          "id": "20",
+          "expected": "save",
+          "decision": "defer",
+          "reason": "uncertain_assessment"
+        }
+      ]
+    },
+    {
+      "minConfidence": 0.25,
+      "summary": {
+        "evaluated": 20,
+        "errors": 0,
+        "labeledEvaluated": 20,
+        "matched": 16,
+        "expectedSaves": 9,
+        "falseSaves": 0,
+        "missedSaves": 3,
+        "saved": 6,
+        "skipped": 13,
+        "deferred": 1,
+        "meanLatencyMs": 298,
+        "inputTokens": 13947,
+        "outputTokens": 2455
+      },
+      "cases": [
+        {
+          "id": "01",
+          "expected": "save",
+          "decision": "save",
+          "reason": "supported_durable_faithful"
+        },
+        {
+          "id": "02",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "03",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "04",
+          "expected": "save",
+          "decision": "save",
+          "reason": "supported_durable_faithful"
+        },
+        {
+          "id": "05",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "06",
+          "expected": "save",
+          "decision": "save",
+          "reason": "supported_durable_faithful"
+        },
+        {
+          "id": "07",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "08",
+          "expected": "save",
+          "decision": "save",
+          "reason": "supported_durable_faithful"
+        },
+        {
+          "id": "09",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "overstated_candidate"
+        },
+        {
+          "id": "10",
+          "expected": "save",
+          "decision": "save",
+          "reason": "supported_durable_faithful"
+        },
+        {
+          "id": "11",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "12",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "13",
+          "expected": "save",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "14",
+          "expected": "defer",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "15",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "16",
+          "expected": "save",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "17",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "18",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "19",
+          "expected": "save",
+          "decision": "save",
+          "reason": "supported_durable_faithful"
+        },
+        {
+          "id": "20",
+          "expected": "save",
+          "decision": "defer",
+          "reason": "uncertain_assessment"
+        }
+      ]
+    },
+    {
+      "minConfidence": 0.4,
+      "summary": {
+        "evaluated": 20,
+        "errors": 0,
+        "labeledEvaluated": 20,
+        "matched": 16,
+        "expectedSaves": 9,
+        "falseSaves": 0,
+        "missedSaves": 4,
+        "saved": 5,
+        "skipped": 12,
+        "deferred": 3,
+        "meanLatencyMs": 298,
+        "inputTokens": 13947,
+        "outputTokens": 2455
+      },
+      "cases": [
+        {
+          "id": "01",
+          "expected": "save",
+          "decision": "save",
+          "reason": "supported_durable_faithful"
+        },
+        {
+          "id": "02",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "03",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "04",
+          "expected": "save",
+          "decision": "save",
+          "reason": "supported_durable_faithful"
+        },
+        {
+          "id": "05",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "06",
+          "expected": "save",
+          "decision": "defer",
+          "reason": "uncertain_assessment"
+        },
+        {
+          "id": "07",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "08",
+          "expected": "save",
+          "decision": "save",
+          "reason": "supported_durable_faithful"
+        },
+        {
+          "id": "09",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "overstated_candidate"
+        },
+        {
+          "id": "10",
+          "expected": "save",
+          "decision": "save",
+          "reason": "supported_durable_faithful"
+        },
+        {
+          "id": "11",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "12",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "13",
+          "expected": "save",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "14",
+          "expected": "defer",
+          "decision": "defer",
+          "reason": "uncertain_assessment"
+        },
+        {
+          "id": "15",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "16",
+          "expected": "save",
+          "decision": "skip",
+          "reason": "overstated_candidate"
+        },
+        {
+          "id": "17",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "18",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "19",
+          "expected": "save",
+          "decision": "save",
+          "reason": "supported_durable_faithful"
+        },
+        {
+          "id": "20",
+          "expected": "save",
+          "decision": "defer",
+          "reason": "uncertain_assessment"
+        }
+      ]
+    },
+    {
+      "minConfidence": 0.5,
+      "summary": {
+        "evaluated": 20,
+        "errors": 0,
+        "labeledEvaluated": 20,
+        "matched": 15,
+        "expectedSaves": 9,
+        "falseSaves": 0,
+        "missedSaves": 5,
+        "saved": 4,
+        "skipped": 12,
+        "deferred": 4,
+        "meanLatencyMs": 298,
+        "inputTokens": 13947,
+        "outputTokens": 2455
+      },
+      "cases": [
+        {
+          "id": "01",
+          "expected": "save",
+          "decision": "save",
+          "reason": "supported_durable_faithful"
+        },
+        {
+          "id": "02",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "03",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "04",
+          "expected": "save",
+          "decision": "save",
+          "reason": "supported_durable_faithful"
+        },
+        {
+          "id": "05",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "06",
+          "expected": "save",
+          "decision": "defer",
+          "reason": "uncertain_assessment"
+        },
+        {
+          "id": "07",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "08",
+          "expected": "save",
+          "decision": "defer",
+          "reason": "uncertain_assessment"
+        },
+        {
+          "id": "09",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "overstated_candidate"
+        },
+        {
+          "id": "10",
+          "expected": "save",
+          "decision": "save",
+          "reason": "supported_durable_faithful"
+        },
+        {
+          "id": "11",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "12",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "13",
+          "expected": "save",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "14",
+          "expected": "defer",
+          "decision": "defer",
+          "reason": "uncertain_assessment"
+        },
+        {
+          "id": "15",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "16",
+          "expected": "save",
+          "decision": "skip",
+          "reason": "overstated_candidate"
+        },
+        {
+          "id": "17",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "18",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "19",
+          "expected": "save",
+          "decision": "save",
+          "reason": "supported_durable_faithful"
+        },
+        {
+          "id": "20",
+          "expected": "save",
+          "decision": "defer",
+          "reason": "uncertain_assessment"
+        }
+      ]
+    },
+    {
+      "minConfidence": 0.6,
+      "summary": {
+        "evaluated": 20,
+        "errors": 0,
+        "labeledEvaluated": 20,
+        "matched": 13,
+        "expectedSaves": 9,
+        "falseSaves": 0,
+        "missedSaves": 7,
+        "saved": 2,
+        "skipped": 11,
+        "deferred": 7,
+        "meanLatencyMs": 298,
+        "inputTokens": 13947,
+        "outputTokens": 2455
+      },
+      "cases": [
+        {
+          "id": "01",
+          "expected": "save",
+          "decision": "defer",
+          "reason": "uncertain_assessment"
+        },
+        {
+          "id": "02",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "temporary_content"
+        },
+        {
+          "id": "03",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "04",
+          "expected": "save",
+          "decision": "save",
+          "reason": "supported_durable_faithful"
+        },
+        {
+          "id": "05",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "06",
+          "expected": "save",
+          "decision": "defer",
+          "reason": "uncertain_assessment"
+        },
+        {
+          "id": "07",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "08",
+          "expected": "save",
+          "decision": "defer",
+          "reason": "uncertain_assessment"
+        },
+        {
+          "id": "09",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "temporary_content"
+        },
+        {
+          "id": "10",
+          "expected": "save",
+          "decision": "save",
+          "reason": "supported_durable_faithful"
+        },
+        {
+          "id": "11",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "12",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "13",
+          "expected": "save",
+          "decision": "defer",
+          "reason": "uncertain_assessment"
+        },
+        {
+          "id": "14",
+          "expected": "defer",
+          "decision": "defer",
+          "reason": "uncertain_assessment"
+        },
+        {
+          "id": "15",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "16",
+          "expected": "save",
+          "decision": "skip",
+          "reason": "overstated_candidate"
+        },
+        {
+          "id": "17",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "18",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "19",
+          "expected": "save",
+          "decision": "defer",
+          "reason": "uncertain_assessment"
+        },
+        {
+          "id": "20",
+          "expected": "save",
+          "decision": "defer",
+          "reason": "uncertain_assessment"
+        }
+      ]
+    },
+    {
+      "minConfidence": 0.75,
+      "summary": {
+        "evaluated": 20,
+        "errors": 0,
+        "labeledEvaluated": 20,
+        "matched": 13,
+        "expectedSaves": 9,
+        "falseSaves": 0,
+        "missedSaves": 7,
+        "saved": 2,
+        "skipped": 11,
+        "deferred": 7,
+        "meanLatencyMs": 298,
+        "inputTokens": 13947,
+        "outputTokens": 2455
+      },
+      "cases": [
+        {
+          "id": "01",
+          "expected": "save",
+          "decision": "defer",
+          "reason": "uncertain_assessment"
+        },
+        {
+          "id": "02",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "temporary_content"
+        },
+        {
+          "id": "03",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "04",
+          "expected": "save",
+          "decision": "save",
+          "reason": "supported_durable_faithful"
+        },
+        {
+          "id": "05",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "06",
+          "expected": "save",
+          "decision": "defer",
+          "reason": "uncertain_assessment"
+        },
+        {
+          "id": "07",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "08",
+          "expected": "save",
+          "decision": "defer",
+          "reason": "uncertain_assessment"
+        },
+        {
+          "id": "09",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "temporary_content"
+        },
+        {
+          "id": "10",
+          "expected": "save",
+          "decision": "save",
+          "reason": "supported_durable_faithful"
+        },
+        {
+          "id": "11",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "12",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "13",
+          "expected": "save",
+          "decision": "defer",
+          "reason": "uncertain_assessment"
+        },
+        {
+          "id": "14",
+          "expected": "defer",
+          "decision": "defer",
+          "reason": "uncertain_assessment"
+        },
+        {
+          "id": "15",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "16",
+          "expected": "save",
+          "decision": "skip",
+          "reason": "overstated_candidate"
+        },
+        {
+          "id": "17",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "18",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "19",
+          "expected": "save",
+          "decision": "defer",
+          "reason": "uncertain_assessment"
+        },
+        {
+          "id": "20",
+          "expected": "save",
+          "decision": "defer",
+          "reason": "uncertain_assessment"
+        }
+      ]
+    },
+    {
+      "minConfidence": 0.9,
+      "summary": {
+        "evaluated": 20,
+        "errors": 0,
+        "labeledEvaluated": 20,
+        "matched": 12,
+        "expectedSaves": 9,
+        "falseSaves": 0,
+        "missedSaves": 7,
+        "saved": 2,
+        "skipped": 9,
+        "deferred": 9,
+        "meanLatencyMs": 298,
+        "inputTokens": 13947,
+        "outputTokens": 2455
+      },
+      "cases": [
+        {
+          "id": "01",
+          "expected": "save",
+          "decision": "defer",
+          "reason": "uncertain_assessment"
+        },
+        {
+          "id": "02",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "temporary_content"
+        },
+        {
+          "id": "03",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "04",
+          "expected": "save",
+          "decision": "save",
+          "reason": "supported_durable_faithful"
+        },
+        {
+          "id": "05",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "06",
+          "expected": "save",
+          "decision": "defer",
+          "reason": "uncertain_assessment"
+        },
+        {
+          "id": "07",
+          "expected": "skip",
+          "decision": "defer",
+          "reason": "uncertain_assessment"
+        },
+        {
+          "id": "08",
+          "expected": "save",
+          "decision": "defer",
+          "reason": "uncertain_assessment"
+        },
+        {
+          "id": "09",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "temporary_content"
+        },
+        {
+          "id": "10",
+          "expected": "save",
+          "decision": "save",
+          "reason": "supported_durable_faithful"
+        },
+        {
+          "id": "11",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "12",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "13",
+          "expected": "save",
+          "decision": "defer",
+          "reason": "uncertain_assessment"
+        },
+        {
+          "id": "14",
+          "expected": "defer",
+          "decision": "defer",
+          "reason": "uncertain_assessment"
+        },
+        {
+          "id": "15",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "16",
+          "expected": "save",
+          "decision": "defer",
+          "reason": "uncertain_assessment"
+        },
+        {
+          "id": "17",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "18",
+          "expected": "skip",
+          "decision": "skip",
+          "reason": "unsupported_candidate"
+        },
+        {
+          "id": "19",
+          "expected": "save",
+          "decision": "defer",
+          "reason": "uncertain_assessment"
+        },
+        {
+          "id": "20",
+          "expected": "save",
+          "decision": "defer",
+          "reason": "uncertain_assessment"
+        }
+      ]
+    }
+  ],
+  "misses": [
+    {
+      "id": "01",
+      "candidate": "使用者偏好繁體中文回覆。",
+      "cause": "positive_choices_below_threshold",
+      "choices": {
+        "support": {
+          "choice": "supported",
+          "confidence": 0.5
+        },
+        "durability": {
+          "choice": "durable",
+          "confidence": 0.98
+        },
+        "commitment": {
+          "choice": "preserved",
+          "confidence": 0.53
+        }
+      }
+    },
+    {
+      "id": "06",
+      "candidate": "Atlas 正在評估 PostgreSQL，尚未決定採用。",
+      "cause": "positive_choices_below_threshold",
+      "choices": {
+        "support": {
+          "choice": "supported",
+          "confidence": 0.92
+        },
+        "durability": {
+          "choice": "durable",
+          "confidence": 0.28
+        },
+        "commitment": {
+          "choice": "preserved",
+          "confidence": 0.99
+        }
+      }
+    },
+    {
+      "id": "08",
+      "candidate": "使用者偏好 TypeScript。",
+      "cause": "positive_choices_below_threshold",
+      "choices": {
+        "support": {
+          "choice": "supported",
+          "confidence": 0.44
+        },
+        "durability": {
+          "choice": "durable",
+          "confidence": 0.92
+        },
+        "commitment": {
+          "choice": "preserved",
+          "confidence": 0.42
+        }
+      }
+    },
+    {
+      "id": "13",
+      "candidate": "Atlas 曾因維運成本而決定不採用 Redis。",
+      "cause": "negative_or_unclear_model_choice",
+      "choices": {
+        "support": {
+          "choice": "unsupported",
+          "confidence": 0.59
+        },
+        "durability": {
+          "choice": "durable",
+          "confidence": 0.96
+        },
+        "commitment": {
+          "choice": "preserved",
+          "confidence": 0.75
+        }
+      }
+    },
+    {
+      "id": "16",
+      "candidate": "Project Atlas prefers pnpm for dependency management.",
+      "cause": "negative_or_unclear_model_choice",
+      "choices": {
+        "support": {
+          "choice": "unsupported",
+          "confidence": 0.39
+        },
+        "durability": {
+          "choice": "durable",
+          "confidence": 0.95
+        },
+        "commitment": {
+          "choice": "overstated",
+          "confidence": 0.87
+        }
+      }
+    },
+    {
+      "id": "19",
+      "candidate": "使用者長期偏好深色模式。",
+      "cause": "positive_choices_below_threshold",
+      "choices": {
+        "support": {
+          "choice": "supported",
+          "confidence": 0.55
+        },
+        "durability": {
+          "choice": "durable",
+          "confidence": 1
+        },
+        "commitment": {
+          "choice": "preserved",
+          "confidence": 0.59
+        }
+      }
+    },
+    {
+      "id": "20",
+      "candidate": "使用者可能偏好精簡回答，目前不確定。",
+      "cause": "negative_or_unclear_model_choice",
+      "choices": {
+        "support": {
+          "choice": "supported",
+          "confidence": 0.34
+        },
+        "durability": {
+          "choice": "unclear",
+          "confidence": 0.13
+        },
+        "commitment": {
+          "choice": "preserved",
+          "confidence": 0.66
+        }
+      }
+    }
+  ]
+}

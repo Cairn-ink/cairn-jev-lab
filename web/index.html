@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cairn Jev Lab · Test what your AI should remember</title>
+  <link rel="stylesheet" href="/style.css"><script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="shell">
+    <header><a class="brand" href="/" aria-label="Cairn Jev Lab home"><span class="mark">∴</span> cairn <span class="brand-sub">JEV LAB</span></a><a class="repo" href="https://github.com/Cairn-ink/cairn-jev-lab" target="_blank" rel="noreferrer">View on GitHub ↗</a></header>
+    <main>
+      <section class="hero"><div class="eyebrow">AN OPEN EXPERIMENT IN AI MEMORY</div><h1>What should your<br>AI <em>remember?</em></h1><p>Put a proposed memory next to its source. Inspect Jev's judgments<br class="desktop"> and see how two simple policies turn them into a recommendation.</p><div class="tag">Developer preview <span>·</span> Recommendations only. No memory is stored.</div></section>
+      <section class="examples" aria-label="Recorded examples"><div class="section-label">START WITH A RECORDED CASE <span>No key. No API call.</span></div><div id="examples" class="example-buttons"></div></section>
+      <div class="workspace">
+        <section class="panel input-panel"><div class="panel-heading"><span class="step">01</span><h2>The evidence</h2><button id="clear" class="text-button" type="button">Clear</button></div>
+          <form id="evaluate-form"><label for="source">Source passage <span>What was actually said</span></label><textarea id="source" rows="6" maxlength="4000" required placeholder="User: We are considering PostgreSQL, but nothing has been decided."></textarea><div class="count" id="source-count">0 / 4,000</div>
+          <label for="candidate">Proposed memory <span>What the agent would keep</span></label><textarea id="candidate" rows="3" maxlength="1000" required placeholder="The team has adopted PostgreSQL."></textarea><div class="count" id="candidate-count">0 / 1,000</div>
+          <button id="evaluate" class="primary" type="submit" disabled>Evaluate with Jev <span>↗</span></button><p class="privacy">Live evaluation sends these two texts to TypeSafe and may incur API charges. Your key stays on the local server.</p><p id="connection" class="connection" role="status">Connecting to local lab…</p>
+          </form><div id="error" class="error" role="alert" hidden></div>
+        </section>
+        <section class="panel output-panel" aria-label="Evaluation result"><div class="panel-heading"><span class="step">02</span><h2>The judgment</h2><span id="mode" class="mode">Waiting for a case</span></div>
+          <div id="empty" class="empty"><span class="empty-mark">◇</span><h3>A memory starts with evidence.</h3><p>Choose a recorded example above,<br>or evaluate your own source and candidate.</p></div>
+          <div id="result" hidden aria-live="polite"><p id="provenance" class="provenance"></p><div id="decisions" class="decisions"></div><p class="comparison-note">Same Jev response. Different confidence thresholds.<br>Baseline remains the default; preview is experimental.</p><div class="section-label judgments-label">THREE TYPED JUDGMENTS</div><div id="judgments"></div><p class="confidence-note">Confidence is the provider's estimate, not a guarantee of correctness.</p><div class="result-footer"><span id="metrics"></span><button id="download" class="text-button" type="button">Download result ↓</button></div></div>
+        </section>
+      </div>
+      <section class="evidence-note"><div><span class="section-label">WHAT WE HAVE OBSERVED</span><h2>A better threshold.<br>Still an experiment.</h2></div><div class="stat"><strong>11 → 15<span>/20</span></strong><p>Matches in the English follow-up</p></div><div class="stat"><strong>2 → 6<span>/10</span></strong><p>Intended saves recovered</p></div><p class="study-note">Both policies used the same 20 responses. Zero false saves in this small synthetic sample; four intended saves still missed.<br><a href="https://github.com/Cairn-ink/cairn-jev-lab/tree/main/evidence/holdout-en-v1" target="_blank" rel="noreferrer">Read the full evidence ↗</a></p></section>
+    </main>
+    <footer><span>Built by Cairn · Powered by Jev</span><span>Source → Judgment → Policy → Recommendation</span></footer>
+  </div>
+</body>
+</html>

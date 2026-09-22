@@ -3,17 +3,18 @@ import { createHash } from 'node:crypto';
 import { parseArgs } from 'node:util';
 import { fileURLToPath } from 'node:url';
 import { resolve, join } from 'node:path';
-import { policy, questions } from './gate.mjs';
+import { getPolicy, questions } from './gate.mjs';
 import { judgeMemory } from './index.mjs';
 import { parseCases } from './cases.mjs';
 import { summarize, renderReport } from './report.mjs';
 
-const help = `Usage: node src/cli.mjs [--live] [--input path.json] [--limit 1..20]
+const help = `Usage: node src/cli.mjs [--live] [--input path.json] [--limit 1..20] [--policy admission-v1|admission-v2-preview]
 
 Default: preview 20 English development cases without network calls.
   --input  JSON array of 1–20 cases; id, source, candidate, optional expected/why.
   --limit  Maximum cases to evaluate; default 20. One request per case, no retries.
   --live   Send cases to TypeSafe using TYPESAFE_API_KEY; API charges may apply.
+  --policy Choose baseline (default admission-v1) or the experimental preview.
   --help   Show this help.
 
 Reports are written to runs/<timestamp>/. Personal cases belong in local-cases/.`;
@@ -21,10 +22,12 @@ let options;
 try {
   options = parseArgs({ options: {
     live: { type: 'boolean', default: false }, help: { type: 'boolean', default: false },
-    input: { type: 'string' }, limit: { type: 'string', default: '20' }
+    input: { type: 'string' }, limit: { type: 'string', default: '20' }, policy: { type: 'string', default: 'admission-v1' }
   }, allowPositionals: false }).values;
 } catch { console.error(help); process.exit(1); }
 if (options.help) { console.log(help); process.exit(0); }
+let policy;
+try { policy = getPolicy(options.policy); } catch { console.error('invalid_policy'); process.exit(1); }
 const limit = Number(options.limit);
 if (!Number.isSafeInteger(limit) || limit < 1 || limit > 20) {
   console.error(help); process.exit(1);
@@ -69,7 +72,7 @@ await save();
 for (const item of cases) {
   report.attemptedCalls++;
   try {
-    const result = await judgeMemory(item, { apiKey: process.env.TYPESAFE_API_KEY, model });
+    const result = await judgeMemory(item, { apiKey: process.env.TYPESAFE_API_KEY, model, policyId: policy.version });
     report.results.push({ ...item, ...result,
       ...(item.expected === undefined ? {} : { matchesExpected: result.decision === item.expected }) });
     console.log(`${item.id} ${result.decision} / expected ${item.expected ?? 'unlabeled'} / ${result.latencyMs}ms`);

@@ -20,6 +20,8 @@ Put private cases in the ignored `local-cases/` directory. Reports repeat source
 
 ## Commands
 
+For an interactive single-case comparison, see the [local playground](playground.md). Add `--policy admission-v2-preview` to any CLI command to select the experimental 0.40 threshold; the default remains `admission-v1` at 0.75.
+
 ```sh
 # Validate custom input, no key or network required
 node src/cli.mjs --input examples/my-cases.json
@@ -35,6 +37,8 @@ node --env-file=.env src/cli.mjs --live --input fixtures/cases.json
 ```
 
 The default is `fixtures/english.json`, a new English adaptation of the original cases. It has not been measured with Jev. `fixtures/cases.json` and the first pilot's JSON remain unchanged to preserve the actual evidence. The cases are small development examples; they are not independent held-out samples.
+
+The separate `fixtures/holdout-en-v1.json` contains 20 fresh English cases evaluated after freezing the policy and labels. Read the [paired evaluation](../evidence/holdout-en-v1/README.md) before interpreting its results. `node scripts/sweep.mjs` reproduces the development threshold analysis offline. `node --env-file=.env scripts/experiment.mjs --live` repeats the paired evaluation with new API usage, writing a new ignored report under `runs/`; it does not replace the published evidence.
 
 ## Reading a report
 

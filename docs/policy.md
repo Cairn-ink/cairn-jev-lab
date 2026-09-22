@@ -20,6 +20,8 @@ The candidate can preserve an unadopted proposal or an uncertain preference. "No
 
 Policy version: **`admission-v1`**. Provisional minimum confidence: **`0.75`**.
 
+This remains the default. The opt-in **`admission-v2-preview`** uses the same questions and rule order with minimum confidence **`0.40`**. Pass `--policy admission-v2-preview` to the CLI, or `policyId: 'admission-v2-preview'` to `judgeMemory` options. The playground compares both on one response.
+
 Apply these rules in order:
 
 1. Confident `unsupported` → `skip`, reason `unsupported_candidate`.
@@ -36,7 +38,7 @@ The `reason` field is selected by code. It is not a model-generated explanation.
 
 The threshold is an experimental product choice, not a measured 75% chance of correctness. Choice probability and the provider's separate confidence field are retained separately. No calibration study has been performed for this memory task.
 
-The first pilot missed 7 of 9 intended saves. Changing the threshold after seeing those results may help development, but must be evaluated on fresh cases. Version changes to questions or policy and retain prior results.
+The first pilot missed 7 of 9 intended saves. An [offline replay](../evidence/threshold-replay-v1/README.md) selected the preview threshold using those development results. A subsequent [frozen, fresh English evaluation](../evidence/holdout-en-v1/README.md) improved agreement from 11/20 to 15/20 and intended saves from 2/10 to 6/10 on identical responses. This supports a larger experiment, not replacing the default. Version changes to questions or policy and retain prior results.
 
 ## Integration boundary
 

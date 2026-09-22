@@ -11,7 +11,7 @@ Cairn Jev Lab is an experimental memory admission evaluator. Give it a source pa
 
 Use it to test a memory policy before letting it decide what an agent keeps. The lab includes editable cases, a reusable JavaScript entry point, and reports that retain both successful judgments and mistakes. Node.js 22+, no runtime dependencies.
 
-> **Developer preview.** The first live pilot matched 13 of 20 expected decisions and missed 7 of 9 intended saves. Use the lab for evaluation and advisory decisions while the policy is being developed.
+> **Developer preview.** On 20 fresh English cases, the baseline matched 11 expected decisions; an experimental lower threshold matched 15, using the same model responses. It still missed 4 of 10 intended saves. This is a small, team-authored experiment, not a production quality claim.
 
 ## Why this exists
 
@@ -35,6 +35,8 @@ This project makes three things inspectable:
 You supply the source and candidate. The lab does not extract memories, rewrite text, store long-term memory, retrieve it, or delete it. A `save` result is a recommendation, not proof that a claim is true.
 
 ## Quick start
+
+Want a visual walkthrough? After cloning, run `node src/server.mjs` and open **http://127.0.0.1:4175/**. Four recorded cases need no key and make no API calls. To evaluate your own text, start with `node --env-file=.env src/server.mjs` instead. The key stays on the local server. See the [playground guide](docs/playground.md).
 
 ```sh
 git clone https://github.com/Cairn-ink/cairn-jev-lab.git
@@ -124,6 +126,25 @@ The `admission-v1` policy uses a provisional confidence threshold of `0.75`. A c
 
 ## What we have measured
 
+### Fresh English comparison
+
+We replayed the original responses offline, selected a preview threshold of `0.40`, and froze the policy and 20 new English cases before calling Jev. Both policies then used the **same 20 responses**, with unchanged questions and `jev-1.13.0`.
+
+| Metric | Baseline: 0.75 | Preview: 0.40 |
+|---|---:|---:|
+| Matches expected decision | 11 / 20 | 15 / 20 |
+| Intended memories saved | 2 / 10 | 6 / 10 |
+| False saves among 10 non-save cases | 0 | 0 |
+| Deferred | 11 | 7 |
+
+The preview recovered four useful memories, but still missed four. Zero false saves in ten examples is limited evidence. These fresh cases share authors and categories with development cases; they are not an independent benchmark. **Baseline remains the default.**
+
+[Full comparison and failures](evidence/holdout-en-v1/README.md) · [Frozen protocol](evidence/holdout-en-v1/PROTOCOL.md) · [Exact responses](evidence/holdout-en-v1/report.json) · [Offline threshold replay](evidence/threshold-replay-v1/README.md)
+
+To opt into the preview in the CLI, add `--policy admission-v2-preview`. In JavaScript, pass `policyId: 'admission-v2-preview'` in the options object. Run `node scripts/sweep.mjs` to reproduce the offline threshold analysis without API calls.
+
+### Original development pilot
+
 The [first live pilot](evidence/pilot-2026-09-22/notes.md) used 20 synthetic development cases, primarily in Traditional Chinese, on September 22, 2026. The provider returned `jev-1.13.0`.
 
 | Metric | Observed |
@@ -134,7 +155,7 @@ The [first live pilot](evidence/pilot-2026-09-22/notes.md) used 20 synthetic dev
 | Missed saves | 7 / 9 cases expected to save |
 | Mean request latency | 298 ms |
 
-The policy was too conservative on this small set. These results are not a held-out benchmark, a comparison against Cairn or another model, or a production quality claim. **The new English examples have not been measured with Jev.** Translation changes the input and does not inherit the original results.
+The policy was too conservative on this small set. These results are not a held-out benchmark, a comparison against Cairn or another model, or a production quality claim. The translated development examples in `fixtures/english.json` remain unmeasured. The separate fresh English evaluation uses `fixtures/holdout-en-v1.json`. Translation does not inherit original results.
 
 [Run report](evidence/pilot-2026-09-22/report.md) · [Exact recorded data](evidence/pilot-2026-09-22/report.json)
 
@@ -144,7 +165,7 @@ The policy was too conservative on this small set. These results are not a held-
 - A run makes at most 20 requests, sequentially, with a 30-second timeout per request and no automatic retries. It stops on the first error and retains the partial report. This is a request limit, not a billing cap.
 - `runs/<timestamp>/` contains `report.json` and `report.md`: inputs, question and fixture hashes, requested and returned model versions, decisions, failures, timing and token usage.
 - `.env`, `runs/`, and the suggested `local-cases/` directory are ignored by Git. Keep personal test data there. Only reviewed synthetic evidence belongs in `evidence/`.
-- Requests default to `jev-latest`. Set `JEV_MODEL` to a provider-supported version for repeatable configuration. A repeated call may still produce different results.
+- CLI/library requests default to `jev-latest`; the playground defaults to `jev-1.13.0`. Set `JEV_MODEL` to a provider-supported version for repeatable configuration. A repeated call may still produce different results.
 
 ## Project scope
 
@@ -152,7 +173,7 @@ This lab explores the decision **before a memory is admitted**. [Cairn Memory](h
 
 The memory-gate idea was inspired by [jev-memory](https://github.com/NicolasMontone/jev-memory). This is an independent implementation focused on source support, an explicit defer outcome, and published evaluation evidence. It calls the [TypeSafe API](https://docs.typesafe.ai/introduction/quickstart) directly.
 
-Next experiments: make speaker attribution explicit, compare a durability-only policy with the current three-question policy, and evaluate fresh cases before proposing a Cairn adapter. Contributions of difficult synthetic cases are welcome; see [CONTRIBUTING.md](CONTRIBUTING.md).
+Next experiments: collect independently authored cases, investigate the remaining actor-attribution and durability failures, and compare a durability-only policy with the current three-question policy before proposing a Cairn adapter. Contributions of difficult synthetic cases are welcome; see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 English is the primary documentation language. Translations live in [`docs/zh-TW/`](docs/zh-TW/README.md). Historical source text and recorded results retain their original language.
 

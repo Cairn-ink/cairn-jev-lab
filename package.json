@@ -9,6 +9,8 @@
   "exports": "./src/index.mjs",
   "engines": { "node": ">=22" },
   "scripts": {
+    "start": "node src/server.mjs",
+    "analyze": "node scripts/sweep.mjs",
     "test": "node --test",
     "preview": "node src/cli.mjs",
     "live": "node --env-file=.env src/cli.mjs --live"

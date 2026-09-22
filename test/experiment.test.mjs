@@ -1,6 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
+import { summarize } from '../src/report.mjs';
 import { decide, getPolicy, policy, previewPolicy } from '../src/gate.mjs';
 import { parseCases } from '../src/cases.mjs';
 
@@ -23,4 +25,17 @@ test('follow-up is distinct from development, with frozen expected-class counts'
   assert.equal(holdout.filter(r => r.expected === 'skip').length, 8);
   assert.equal(holdout.filter(r => r.expected === 'defer').length, 2);
   for (const r of holdout) assert.equal(development.some(d => d.source === r.source), false);
+});
+
+test('published follow-up hashes and paired metrics reproduce from exact recorded responses', async () => {
+  const report = JSON.parse(await readFile(new URL('../evidence/holdout-en-v1/report.json', import.meta.url)));
+  for (const [file, hashField] of [['fixtures/holdout-en-v1.json', 'fixtureSha256'], ['evidence/holdout-en-v1/PROTOCOL.md', 'protocolSha256']]) {
+    const bytes = await readFile(new URL('../' + file, import.meta.url));
+    assert.equal(createHash('sha256').update(bytes).digest('hex'), report[hashField]);
+  }
+  assert.equal(report.completed, true);
+  for (const p of report.policies) {
+    const results = report.results.map(r => ({ ...r, ...decide(r.answers, p) }));
+    assert.deepEqual(summarize(results), report.summaries[p.version]);
+  }
 });

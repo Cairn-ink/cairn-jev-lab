@@ -68,7 +68,7 @@ This clarifies the intent of the existing negative-first code order. It does not
 
 ## Next validation
 
-The [20-pair human review packet](../evidence/boundary-review-v1/README.md) is now prepared without expected labels or model calls. It is awaiting human review; it is not completed independent validation.
+The next study starts with a prepared [20-pair contrast set](../evidence/boundary-review-v1/README.md), designed to distinguish unsupported specificity from genuinely unresolved context. The planned validation pairs blind independent review with model evaluation after labels are frozen. The packet currently contains no expected labels or model results.
 
 Use contrast sets like the examples above: same source with an invented detail versus a preserved unknown, then the same candidate with the missing context supplied. Include faithful uncertain statements, clearly temporary content and ambiguous durability. Freeze intended labels before new calls and have independent reviewers annotate them without seeing model output; record disagreements rather than forcing unanimous labels.
 

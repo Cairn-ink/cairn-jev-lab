@@ -1,6 +1,6 @@
-# Boundary review preparation
+# Next experiment: sharpen the memory boundary
 
-**Deferred. The review packet is prepared, but human review and model evaluation are paused. No model results or reviewed labels yet.**
+**20 contrast cases prepared for the next validation study.** The study will examine when to reject unsupported detail and when to defer an unresolved assessment. Independent labels and model results will be published as the study progresses; neither is available yet.
 
 This follow-up investigates the skip/defer labeling overlap identified in the [100-case audit](../../docs/decision-boundary.md). It contains 20 new source/candidate pairs with controlled contrasts and intentionally unresolved cases. The cases are AI-authored, without an answer key.
 

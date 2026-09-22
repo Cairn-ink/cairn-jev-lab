@@ -26,6 +26,8 @@ These are experimental results against AI-authored labels, without independent h
 
 Explore the dashboard and replay four recorded examples without an account or key. To evaluate your own cases, clone the repo and use your own TypeSafe key locally. The demo does not store memories or connect to production Cairn Memory writes.
 
+Next, we plan to sharpen the skip/defer boundary with 20 prepared contrast cases, expand community-authored tests, and explore an opt-in Cairn Memory adapter starting with dry-run recommendations.
+
 Have an example that challenges the policy? Share a synthetic case and your expected decision on GitHub.
 
 Demo: https://lab.cairn.ink

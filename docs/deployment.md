@@ -20,7 +20,7 @@ The main `cairn.ink` site continues to use its existing Railway destination. Thi
 - Public Pages preview loaded all study metrics and recorded examples.
 - Custom HTTPS hostname opened successfully in the browser.
 - Replay included a recovered save, an unsupported proposal and an attribution failure.
-- Human review remains deferred; the original evidence and scores are unchanged.
+- The [next-phase plan](../README.md#what-comes-next) covers boundary validation, community cases and a prospective Cairn Memory adapter. Original evidence and scores are unchanged.
 
 ## Walkthrough
 

@@ -24,7 +24,7 @@ A memory can sound plausible while changing what someone actually said:
 | “We might try PostgreSQL; nothing is decided.” | “The team adopted PostgreSQL.” | Skip |
 | “Let's do what we discussed earlier.” | “The user approved the original plan.” | Skip: approval is not established |
 
-These are policy examples, not observed model outputs. Defer means an unresolved assessment without a confident rejection; it does not excuse invented details. See the [boundary audit](docs/decision-boundary.md). Independent human review is deferred; the original experiment labels and scores remain unchanged.
+These are policy examples, not observed model outputs. Defer means an unresolved assessment without a confident rejection; it does not excuse invented details. See the [boundary audit](docs/decision-boundary.md) and [what comes next](#what-comes-next).
 
 This project makes three things inspectable:
 
@@ -212,7 +212,15 @@ This lab explores the decision **before a memory is admitted**. [Cairn Memory](h
 
 The memory-gate idea was inspired by [jev-memory](https://github.com/NicolasMontone/jev-memory). This is an independent implementation focused on source support, an explicit defer outcome, and published evaluation evidence. It calls the [TypeSafe API](https://docs.typesafe.ai/introduction/quickstart) directly.
 
-Next experiments: collect independently authored cases, investigate the remaining actor-attribution and durability failures, and compare a durability-only policy with the current three-question policy before proposing a Cairn adapter. Contributions of difficult synthetic cases are welcome; see [CONTRIBUTING.md](CONTRIBUTING.md).
+## What comes next
+
+The first 100 cases surfaced a useful research question: **when should a memory gate reject a claim, and when should it ask for more evidence?** Our next phase turns that question into testable comparisons:
+
+1. **Sharper decision boundaries.** Use the [20 prepared contrast cases](evidence/boundary-review-v1/README.md) to separate invented details from genuinely unresolved context. The planned study includes blind independent review and records disagreements before model evaluation.
+2. **Harder cases, clearer tradeoffs.** Add community-authored synthetic cases, investigate speaker attribution and future usefulness, and compare a durability-only policy with the three-question policy. Report missed saves alongside false saves, latency and repeatability.
+3. **A path into Cairn Memory.** Explore an opt-in adapter that carries source evidence and admission reasons into a memory workflow. Start with dry-run recommendations and evaluate the policy before enabling writes.
+
+These are planned experiments, not completed results or a committed release schedule. **Bring a case that challenges the policy:** share a synthetic source, proposed memory and expected decision through [CONTRIBUTING.md](CONTRIBUTING.md).
 
 English is the primary documentation language. Translations live in [`docs/zh-TW/`](docs/zh-TW/README.md). Historical source text and recorded results retain their original language.
 

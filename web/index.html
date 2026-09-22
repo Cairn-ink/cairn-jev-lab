@@ -2,14 +2,60 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Cairn Jev Lab · Test what your AI should remember</title>
-  <link rel="stylesheet" href="/style.css"><script src="/app.js" defer></script>
+  <meta name="description" content="An open experiment in AI memory. Explore real Jev evaluations, compare admission policies, and test what your AI should remember.">
+  <meta name="theme-color" content="#FAF7F2">
+  <title>Cairn Jev Lab · Before it becomes a memory</title>
+  <link rel="stylesheet" href="./style.css"><script src="./app.js" defer></script><script src="./dashboard.js" defer></script>
 </head>
 <body>
+  <a class="skip-link" href="#try-yourself">Skip to playground</a>
   <div class="shell">
-    <header><a class="brand" href="/" aria-label="Cairn Jev Lab home"><span class="mark">∴</span> cairn <span class="brand-sub">JEV LAB</span></a><a class="repo" href="https://github.com/Cairn-ink/cairn-jev-lab" target="_blank" rel="noreferrer">View on GitHub ↗</a></header>
+    <header>
+      <a class="brand" href="./" aria-label="Cairn Jev Lab home"><svg viewBox="0 0 24 34" width="26" height="37" aria-hidden="true"><ellipse cx="12" cy="28" rx="10.5" ry="3.6" fill="currentColor" opacity=".95"/><ellipse cx="11.5" cy="19.5" rx="7.8" ry="3.2" fill="currentColor" opacity=".78" transform="rotate(-6 11.5 19.5)"/><ellipse cx="12.5" cy="11" rx="5.2" ry="3.6" fill="currentColor" opacity=".62" transform="rotate(9 12.5 11)"/></svg><span>Cairn</span><span class="brand-sub">Jev Lab</span></a>
+      <nav aria-label="Main navigation"><a href="#findings">The findings</a><a href="#try-yourself">Try yourself</a><a href="https://github.com/Cairn-ink/cairn-jev-lab" target="_blank" rel="noreferrer">GitHub ↗</a></nav>
+    </header>
     <main>
-      <section class="hero"><div class="eyebrow">AN OPEN EXPERIMENT IN AI MEMORY</div><h1>What should your<br>AI <em>remember?</em></h1><p>Put a proposed memory next to its source. Inspect Jev's judgments<br class="desktop"> and see how two simple policies turn them into a recommendation.</p><div class="tag">Developer preview <span>·</span> Recommendations only. No memory is stored.</div></section>
+      <section class="hero">
+        <div class="hero-copy"><div class="eyebrow"><span class="status-dot"></span> An open experiment in AI memory</div>
+        <h1>Before it becomes<br>a <em>memory.</em></h1>
+        <p>Should your AI keep that thought?<br>We use Jev to test whether a memory is supported,<br class="desktop"> useful over time, and faithful to what was said.</p>
+        <div class="hero-actions"><a class="button solid" href="#try-yourself">Try it yourself <span>↗</span></a><a class="button quiet" href="https://github.com/Cairn-ink/cairn-jev-lab" target="_blank" rel="noreferrer">Explore the repo ↗</a></div>
+        <p class="hero-footnote">Open source · Recorded examples need no key</p></div>
+        <aside class="field-note" aria-label="Illustrative memory example"><div class="note-heading"><span>From the lab notebook</span><span>01 / 03</span></div><p class="note-label">What was said</p><blockquote>“Let’s discuss it next month;<br> nothing is approved.”</blockquote><div class="note-connector">↓</div><p class="note-label">What an agent might remember</p><p class="candidate-quote">“The team adopted<br> weekly releases.”</p><div class="note-verdict"><span class="verdict-pill">Skip</span><span>A proposal is not a decision.</span></div><p class="note-caption">Illustration adapted from recorded case h13.<br>No memory is stored by this lab.</p></aside>
+      </section>
+
+      <section class="snapshot" aria-label="Measured experiment results">
+        <div class="snapshot-heading"><span class="eyebrow">Measured, not promised.</span><span id="study-scope">Loading recorded study…</span></div>
+        <div class="metric-strip">
+          <div class="headline-stat"><p>Mean Jev response</p><strong><span id="mean-latency">—</span><small>ms</small></strong><span id="latency-detail">Client-observed request time</span></div>
+          <div class="headline-stat"><p>Preview agreement</p><strong><span id="preview-agreement">—</span><small>%</small></strong><span id="agreement-detail">Against our expected labels</span></div>
+          <div class="headline-stat"><p>Intended memories saved</p><strong><span id="saved-count">—</span><small id="saved-total"></small></strong><span id="save-detail">Preview policy · repeated observations</span></div>
+          <div class="headline-stat"><p>English evaluations</p><strong id="evaluation-count">—</strong><span id="sample-detail">Same cases, repeated calls</span></div>
+        </div>
+        <p class="scope-note">Small, team-authored synthetic study. Repeats are not independent examples. These are admission recommendations, not verified facts or stored memories.</p>
+      </section>
+
+      <section id="findings" class="findings" aria-labelledby="findings-title">
+        <div class="section-intro"><div><span class="eyebrow">The findings</span><h2 id="findings-title">A threshold changes what gets kept.</h2></div><a class="inline-link" href="https://github.com/Cairn-ink/cairn-jev-lab/tree/main/evidence/repeat-en-v1" target="_blank" rel="noreferrer">Read the experiment ↗</a></div>
+        <div class="dashboard-grid">
+          <article class="chart-card"><div class="chart-heading"><h3>Same responses. Two policies.</h3><span class="small-label">Matches / 20</span></div>
+            <div class="legend"><span><i class="legend-dot baseline"></i>Baseline · 0.75</span><span><i class="legend-dot preview"></i>Preview · 0.40</span></div>
+            <div id="pass-chart" class="pass-chart" aria-label="Agreement by evaluation pass"></div>
+            <p class="chart-note" id="variation-note">Loading repeatability results…</p>
+          </article>
+          <article class="chart-card timing-card"><div class="chart-heading"><h3>Every response time, kept.</h3><span class="small-label">Milliseconds</span></div>
+            <div class="timing-summary"><div><strong id="median-latency">—</strong><span>Median</span></div><div><strong id="p95-latency">—</strong><span>95th percentile</span></div><div><strong id="max-latency">—</strong><span>Slowest</span></div></div>
+            <div id="latency-chart" class="latency-chart" role="img" aria-label="Loading response times"></div><div class="chart-axis"><span>Pass 1</span><span>Pass 2</span><span>Pass 3</span></div>
+            <p class="chart-note">Includes network time and the first request. No outliers removed. Not a throughput test or speed guarantee.</p>
+          </article>
+        </div>
+        <div class="limits-strip"><span class="limits-label">What still needs work</span><p id="study-limits">Loading observed limitations…</p><a href="https://github.com/Cairn-ink/cairn-jev-lab/tree/main/evidence/holdout-en-v1" target="_blank" rel="noreferrer">Original 20-case study ↗</a></div>
+      </section>
+
+      <section class="method" aria-labelledby="method-title"><div class="method-title"><span class="eyebrow">The standard</span><h2 id="method-title">Three questions.<br>One recommendation.</h2></div><div class="method-item"><span class="method-number">01</span><h3>Supported?</h3><p>Does the original passage actually support the proposed memory?</p></div><div class="method-item"><span class="method-number">02</span><h3>Useful later?</h3><p>Will this matter beyond the current conversation?</p></div><div class="method-item"><span class="method-number">03</span><h3>Faithful?</h3><p>Are proposals, conditions and uncertainty preserved?</p></div></section>
+
+      <section id="try-yourself" class="try-section" aria-labelledby="try-title"><div class="section-intro"><div><span class="eyebrow">Your turn</span><h2 id="try-title">Try it yourself.</h2><p>Start with a recorded case. Then test a memory of your own.</p></div><span class="experiment-badge">Save / Skip / Defer</span></div>
+        <div class="mode-guide"><p><strong>Explore examples</strong><span>Real recorded results. No key, no new API calls.</span></p><p><strong>Evaluate your text</strong><span id="live-guide">Run locally with your TypeSafe key. One API call per evaluation.</span></p></div>
       <section class="examples" aria-label="Recorded examples"><div class="section-label">START WITH A RECORDED CASE <span>No key. No API call.</span></div><div id="examples" class="example-buttons"></div></section>
       <div class="workspace">
         <section class="panel input-panel"><div class="panel-heading"><span class="step">01</span><h2>The evidence</h2><button id="clear" class="text-button" type="button">Clear</button></div>
@@ -23,9 +69,11 @@
           <div id="result" hidden aria-live="polite"><p id="provenance" class="provenance"></p><div id="decisions" class="decisions"></div><p class="comparison-note">Same Jev response. Different confidence thresholds.<br>Baseline remains the default; preview is experimental.</p><div class="section-label judgments-label">THREE TYPED JUDGMENTS</div><div id="judgments"></div><p class="confidence-note">Confidence is the provider's estimate, not a guarantee of correctness.</p><div class="result-footer"><span id="metrics"></span><button id="download" class="text-button" type="button">Download result ↓</button></div></div>
         </section>
       </div>
-      <section class="evidence-note"><div><span class="section-label">WHAT WE HAVE OBSERVED</span><h2>A better threshold.<br>Still an experiment.</h2></div><div class="stat"><strong>11 → 15<span>/20</span></strong><p>Matches in the English follow-up</p></div><div class="stat"><strong>2 → 6<span>/10</span></strong><p>Intended saves recovered</p></div><p class="study-note">Both policies used the same 20 responses. Zero false saves in this small synthetic sample; four intended saves still missed.<br><a href="https://github.com/Cairn-ink/cairn-jev-lab/tree/main/evidence/holdout-en-v1" target="_blank" rel="noreferrer">Read the full evidence ↗</a></p></section>
+
+      </section>
+      <section class="contribute"><div><span class="eyebrow">Help us find the edge cases</span><h2>What would your AI get wrong?</h2><p>Try your own synthetic examples. Share the expected decision<br class="desktop"> and the actual result so others can reproduce it.</p></div><div class="contribute-actions"><a class="button solid" href="https://github.com/Cairn-ink/cairn-jev-lab#quick-start" target="_blank" rel="noreferrer">Run the lab locally ↗</a><a class="inline-link" href="https://github.com/Cairn-ink/cairn-jev-lab/issues/new" target="_blank" rel="noreferrer">Share a case on GitHub ↗</a></div></section>
     </main>
-    <footer><span>Built by Cairn · Powered by Jev</span><span>Source → Judgment → Policy → Recommendation</span></footer>
+    <footer><span>Cairn Jev Lab <span class="footer-dot">·</span> Built by Cairn. Powered by Jev.</span><a href="https://github.com/Cairn-ink/cairn-jev-lab/blob/main/docs/policy.md" target="_blank" rel="noreferrer">An experiment, with the evidence open. ↗</a></footer>
   </div>
 </body>
 </html>

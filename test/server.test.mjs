@@ -27,7 +27,9 @@ test('recorded playground works without a key and never exposes credentials or a
   assert.equal((await fetch(base + '/.env')).status, 404);
   const page = await fetch(base + '/');
   assert.match(page.headers.get('content-security-policy'), /frame-ancestors 'none'/);
-  assert.match(await page.text(), /What should your/);
+  assert.match(await page.text(), /id="try-yourself"/);
+  assert.equal((await fetch(base + '/study.json')).status, 200);
+  assert.equal((await fetch(base + '/examples.json')).status, 200);
 });
 test('live API validates origins, token and inputs before spending; caps calls and compares both policies', async t => {
   let calls = 0;

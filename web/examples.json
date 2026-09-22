@@ -1,0 +1,274 @@
+[
+  {
+    "label": "Lasting preference",
+    "id": "h01",
+    "source": "User: My work timezone is Europe/Berlin. Use that timezone when suggesting meeting times for me.",
+    "candidate": "The user wants meeting suggestions in Europe/Berlin time.",
+    "expected": "save",
+    "why": "An explicit ongoing scheduling preference.",
+    "model": "jev-1.13.0",
+    "answers": {
+      "support": {
+        "type": "choice",
+        "choice": "supported",
+        "confidence": 0.79,
+        "probabilities": {
+          "supported": 0.86,
+          "unsupported": 0.14,
+          "unclear": 0
+        }
+      },
+      "durability": {
+        "type": "choice",
+        "choice": "durable",
+        "confidence": 0.69,
+        "probabilities": {
+          "durable": 0.8,
+          "temporary": 0.2,
+          "unclear": 0
+        }
+      },
+      "commitment": {
+        "type": "choice",
+        "choice": "preserved",
+        "confidence": 0.76,
+        "probabilities": {
+          "preserved": 0.84,
+          "overstated": 0.16,
+          "unclear": 0
+        }
+      }
+    },
+    "usage": {
+      "input_tokens": 698,
+      "output_tokens": 123
+    },
+    "latencyMs": 706,
+    "decisions": {
+      "admission-v1": {
+        "decision": "defer",
+        "reason": "uncertain_assessment"
+      },
+      "admission-v2-preview": {
+        "decision": "save",
+        "reason": "supported_durable_faithful"
+      }
+    },
+    "policies": [
+      {
+        "version": "admission-v1",
+        "minConfidence": 0.75
+      },
+      {
+        "version": "admission-v2-preview",
+        "minConfidence": 0.4
+      }
+    ],
+    "mode": "recorded",
+    "recordedAt": "2026-09-22T07:02:15.766Z"
+  },
+  {
+    "label": "Proposal vs. decision",
+    "id": "h13",
+    "source": "Assistant: We could switch Harbor to weekly releases. User: Let's discuss it next month; nothing is approved.",
+    "candidate": "Harbor has adopted weekly releases.",
+    "expected": "skip",
+    "why": "A deferred proposal is not an adopted decision.",
+    "model": "jev-1.13.0",
+    "answers": {
+      "support": {
+        "type": "choice",
+        "choice": "unsupported",
+        "confidence": 1,
+        "probabilities": {
+          "supported": 0,
+          "unsupported": 1,
+          "unclear": 0
+        }
+      },
+      "durability": {
+        "type": "choice",
+        "choice": "temporary",
+        "confidence": 0.77,
+        "probabilities": {
+          "durable": 0.1,
+          "temporary": 0.85,
+          "unclear": 0.05
+        }
+      },
+      "commitment": {
+        "type": "choice",
+        "choice": "overstated",
+        "confidence": 1,
+        "probabilities": {
+          "preserved": 0,
+          "overstated": 1,
+          "unclear": 0
+        }
+      }
+    },
+    "usage": {
+      "input_tokens": 695,
+      "output_tokens": 122
+    },
+    "latencyMs": 281,
+    "decisions": {
+      "admission-v1": {
+        "decision": "skip",
+        "reason": "unsupported_candidate"
+      },
+      "admission-v2-preview": {
+        "decision": "skip",
+        "reason": "unsupported_candidate"
+      }
+    },
+    "policies": [
+      {
+        "version": "admission-v1",
+        "minConfidence": 0.75
+      },
+      {
+        "version": "admission-v2-preview",
+        "minConfidence": 0.4
+      }
+    ],
+    "mode": "recorded",
+    "recordedAt": "2026-09-22T07:02:15.766Z"
+  },
+  {
+    "label": "Missing context",
+    "id": "h19",
+    "source": "User: Use the other one from now on.",
+    "candidate": "The user wants the other option to be the future default.",
+    "expected": "defer",
+    "why": "The referent and relevant scope are absent.",
+    "model": "jev-1.13.0",
+    "answers": {
+      "support": {
+        "type": "choice",
+        "choice": "supported",
+        "confidence": 0.29,
+        "probabilities": {
+          "supported": 0.53,
+          "unsupported": 0.43,
+          "unclear": 0.04
+        }
+      },
+      "durability": {
+        "type": "choice",
+        "choice": "durable",
+        "confidence": 0.39,
+        "probabilities": {
+          "durable": 0.6,
+          "temporary": 0.11,
+          "unclear": 0.29
+        }
+      },
+      "commitment": {
+        "type": "choice",
+        "choice": "preserved",
+        "confidence": 0.41,
+        "probabilities": {
+          "preserved": 0.61,
+          "overstated": 0.38,
+          "unclear": 0.01
+        }
+      }
+    },
+    "usage": {
+      "input_tokens": 687,
+      "output_tokens": 123
+    },
+    "latencyMs": 306,
+    "decisions": {
+      "admission-v1": {
+        "decision": "defer",
+        "reason": "uncertain_assessment"
+      },
+      "admission-v2-preview": {
+        "decision": "defer",
+        "reason": "uncertain_assessment"
+      }
+    },
+    "policies": [
+      {
+        "version": "admission-v1",
+        "minConfidence": 0.75
+      },
+      {
+        "version": "admission-v2-preview",
+        "minConfidence": 0.4
+      }
+    ],
+    "mode": "recorded",
+    "recordedAt": "2026-09-22T07:02:15.766Z"
+  },
+  {
+    "label": "An attribution failure",
+    "id": "h11",
+    "source": "User: Omar prefers audio summaries. I prefer reading text summaries.",
+    "candidate": "The user prefers audio summaries.",
+    "expected": "skip",
+    "why": "Another person's preference is assigned to the user.",
+    "model": "jev-1.13.0",
+    "answers": {
+      "support": {
+        "type": "choice",
+        "choice": "supported",
+        "confidence": 0.35,
+        "probabilities": {
+          "supported": 0.57,
+          "unsupported": 0.41,
+          "unclear": 0.02
+        }
+      },
+      "durability": {
+        "type": "choice",
+        "choice": "durable",
+        "confidence": 0.79,
+        "probabilities": {
+          "durable": 0.86,
+          "temporary": 0.09,
+          "unclear": 0.05
+        }
+      },
+      "commitment": {
+        "type": "choice",
+        "choice": "preserved",
+        "confidence": 0.26,
+        "probabilities": {
+          "preserved": 0.51,
+          "overstated": 0.48,
+          "unclear": 0.01
+        }
+      }
+    },
+    "usage": {
+      "input_tokens": 684,
+      "output_tokens": 123
+    },
+    "latencyMs": 329,
+    "decisions": {
+      "admission-v1": {
+        "decision": "defer",
+        "reason": "uncertain_assessment"
+      },
+      "admission-v2-preview": {
+        "decision": "defer",
+        "reason": "uncertain_assessment"
+      }
+    },
+    "policies": [
+      {
+        "version": "admission-v1",
+        "minConfidence": 0.75
+      },
+      {
+        "version": "admission-v2-preview",
+        "minConfidence": 0.4
+      }
+    ],
+    "mode": "recorded",
+    "recordedAt": "2026-09-22T07:02:15.766Z"
+  }
+]

@@ -9,6 +9,11 @@ const root = new URL('../', import.meta.url);
 const assets = new Map([
   ['/', ['web/index.html', 'text/html; charset=utf-8']],
   ['/app.js', ['web/app.js', 'text/javascript; charset=utf-8']],
+  ['/dashboard.js', ['web/dashboard.js', 'text/javascript; charset=utf-8']],
+  ['/study.json', ['web/study.json', 'application/json; charset=utf-8']],
+  ['/examples.json', ['web/examples.json', 'application/json; charset=utf-8']],
+  ['/fonts/eb-garamond.ttf', ['web/fonts/eb-garamond.ttf', 'font/ttf']],
+  ['/fonts/inter.ttf', ['web/fonts/inter.ttf', 'font/ttf']],
   ['/style.css', ['web/style.css', 'text/css; charset=utf-8']]
 ]);
 const errorCode = error => /^(invalid_case|invalid_answers|network_or_timeout|invalid_provider_response|provider_http_\d{3})$/.test(error.message)
@@ -34,7 +39,7 @@ export async function createLabServer({ apiKey = process.env.TYPESAFE_API_KEY, m
     res.setHeader('Cache-Control', 'no-store');
     res.setHeader('X-Content-Type-Options', 'nosniff');
     res.setHeader('Referrer-Policy', 'no-referrer');
-    res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; frame-ancestors 'none'; base-uri 'none'; form-action 'self'");
+    res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self'; style-src 'self'; style-src-attr 'unsafe-inline'; connect-src 'self'; img-src 'self' data:; frame-ancestors 'none'; base-uri 'none'; form-action 'self'");
     const json = (status, body) => { res.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8' }); res.end(JSON.stringify(body)); };
     try {
       if (req.headers.host !== host || (req.headers.origin && req.headers.origin !== origin) ||

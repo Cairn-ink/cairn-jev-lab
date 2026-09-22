@@ -64,6 +64,10 @@ node --env-file=.env src/cli.mjs --live --input examples/my-cases.json
 
 ## 文件與貢獻
 
+首頁新增實驗儀表板，並沿用 Cairn 的紙白、苔綠與字體。追加兩輪相同英文案例後，合計為 **20 個不同案例、60 次評估**：平均回應 289 ms、中位數 271 ms、p95 363 ms；實驗版三輪各有 15、15、14 題符合預期，共 44/60，並有 2 題判斷隨輪次改變。這是重複測試，不能當成 60 個獨立案例。[完整補測報告](../../evidence/repeat-en-v1/README.md)。
+
+上方數字由公開實測資料產生，不會被訪客的即時測試改動。下方 Try it yourself 保留歷史案例與本機即時評估。`web/` 亦可單獨發布為不含 key 的歷史案例展示；公開網域不啟用即時 API，訪客需下載並設定自己的 key 才能測新文字。
+
 英文為主要文件語言，中文 Markdown 放在此目錄，以相互連結切換；目前採手動維護，沒有自動翻譯服務。歡迎提供合成的困難案例，參考 [貢獻指南](../../CONTRIBUTING.md)。
 
 本專案受 [jev-memory](https://github.com/NicolasMontone/jev-memory) 的關卡概念啟發，獨立實作並直接呼叫 TypeSafe API。Cairn Memory 仍負責來源憑證、儲存、版本、修正與遺忘。程式碼採 [MIT License](../../LICENSE)。

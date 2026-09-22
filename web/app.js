@@ -17,7 +17,8 @@ function updateStatus() {
   $('evaluate').disabled = busy || !status?.configured || status.remaining <= 0;
   $('evaluate').textContent = busy ? 'Evaluating…' : 'Evaluate with Jev ↗';
   $('connection').textContent = !status ? 'Local server unavailable. Reload after starting the lab.' : status.configured
-    ? `Live ready · ${status.model} · ${status.remaining} of ${status.maxCalls} calls remaining` : 'Recorded examples ready. Start the server with your local key to enable live evaluation.';
+    ? `Live ready · ${status.model} · ${status.remaining} of ${status.maxCalls} calls remaining` : 'Recorded examples ready. Run the lab locally with your key to evaluate new text.';
+  if ($('live-guide')) $('live-guide').textContent = status?.configured ? 'Live mode is enabled on this local server. One API call per evaluation.' : 'Download the repo and run locally with your TypeSafe key.';
   $('clear').disabled = busy;
   for (const el of [$('source'), $('candidate')]) el.disabled = busy;
   for (const button of $('examples').children) button.disabled = busy;
@@ -68,14 +69,19 @@ $('evaluate-form').addEventListener('submit', async event => {
 });
 async function start() {
   try {
-    const responses = await Promise.all([fetch('/api/status'), fetch('/api/examples')]);
-    if (responses.some(r => !r.ok)) throw new Error('server_unavailable');
-    [status, examples] = await Promise.all(responses.map(r => r.json()));
+    const response = await fetch('./examples.json');
+    if (!response.ok) throw new Error('examples_unavailable');
+    examples = await response.json();
+    status = { configured: false, remaining: 0 };
+    // Public/static copies are replay-only. Live calls belong to the loopback server.
+    if (location.hostname === '127.0.0.1') {
+      try { const live = await fetch('/api/status'); if (live.ok) status = await live.json(); } catch { /* Recorded examples remain usable. */ }
+    }
     for (const example of examples) {
       const button = node('button', '', example.label); button.type = 'button'; button.setAttribute('aria-pressed', 'false');
       button.addEventListener('click', () => { if (busy) return; clearResult(); $('source').value = example.source; $('candidate').value = example.candidate; counts(); button.setAttribute('aria-pressed', 'true'); show(example); }); $('examples').append(button);
     }
-  } catch { $('error').textContent = 'Cannot connect to the local lab. Start the server and reload this page.'; $('error').hidden = false; }
+  } catch { $('error').textContent = 'Recorded examples could not load. Reload the page or view the published evidence on GitHub.'; $('error').hidden = false; }
   updateStatus();
 }
 start();

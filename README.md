@@ -126,6 +126,14 @@ The `admission-v1` policy uses a provisional confidence threshold of `0.75`. A c
 
 ## What we have measured
 
+### Repeatability and response time
+
+We subsequently repeated the same English set twice without changing labels, questions or policies: **20 unique cases, three passes, 60 evaluations**. Preview agreement was 15/20, 15/20 and 14/20; pooled agreement was 44/60 versus baseline 33/60. Preview saved 16/30 intended-save observations and missed 14/30. Two cases changed preview decisions across passes. Repeats are correlated observations, not new independent examples.
+
+Mean client-observed response time was **289 ms**, median **271 ms**, and nearest-rank p95 **363 ms**, including all requests and network time. This is not a production speed guarantee. [Full repeatability evidence](evidence/repeat-en-v1/README.md).
+
+The landing page presents these measured results, per-pass comparisons and response times above **Try it yourself**. `node scripts/build-study.mjs` regenerates the dashboard data and repeatability summary from published responses without API calls. Recorded examples work in a static copy of `web/`; new evaluations require the local server and your own key. See [the playground and distribution guide](docs/playground.md).
+
 ### Fresh English comparison
 
 We replayed the original responses offline, selected a preview threshold of `0.40`, and froze the policy and 20 new English cases before calling Jev. Both policies then used the **same 20 responses**, with unchanged questions and `jev-1.13.0`.

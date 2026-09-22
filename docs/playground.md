@@ -30,3 +30,17 @@ The server accepts one live request at a time, at most 20 attempts per process, 
 The default playground model is `jev-1.13.0`; set `JEV_MODEL` to override it. `PORT` changes the default port, 4175. A new request may differ from a recorded response.
 
 Neither result stores a memory. The baseline remains the library/CLI default, and the lower-threshold preview is experimental.
+
+## Landing page and recorded-only distribution
+
+The page starts with a compact study dashboard, then explains the three judgments and links to **Try it yourself**, the evidence and GitHub. Metrics come from `web/study.json`, generated from the original English report plus two repeat passes. They describe 20 unique cases and 60 requests; ad-hoc playground calls never change them. Latency includes network time; repeats are not independent examples.
+
+Rebuild published display data with `node scripts/build-study.mjs` (no API use). A separate `node --env-file=.env scripts/repeat.mjs --live` makes up to 40 additional calls for the frozen repeatability protocol and writes a new ignored report; it does not overwrite published evidence.
+
+The contents of `web/` can also be served by a static host, including under a path prefix. That version loads `study.json` and `examples.json`, replays the recorded cases and links to local setup. It never enables live evaluation on a public hostname. No API key, provider proxy or account is bundled. Public hosting is a separate deployment step; the default local address is not a shareable public URL. A static host may require its own security headers; the Node server's headers are not automatically carried over.
+
+## Visual reference
+
+The design follows the supplied [Cairn brand ruler](https://github.com/wsxqaza12/cairn-wiki/blob/docs/cairn-style-ruler-20260913/docs/brand/README.md): paper `#FAF7F2`, warm surface `#F4F0E8`, ink `#1F1D1A`, muted ink `#6B6560`, moss `#5A7A4E`, EB Garamond titles and Inter controls/body. The stacked-stone mark preserves the existing `CairnStones` geometry. The lab uses an editorial notebook and compact evidence charts instead of the main site's island illustrations. On narrow screens the illustrative notebook is omitted to keep measured results near the introduction.
+
+Fonts are self-hosted from Google Fonts, with their SIL Open Font Licenses in `web/fonts/`. The logo is Cairn's brand identity; the font licenses govern the bundled font files. Public UI stays English; the Chinese overview remains in `docs/zh-TW/`.

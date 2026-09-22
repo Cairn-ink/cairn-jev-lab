@@ -1,5 +1,7 @@
 # Cairn Jev Lab
 
+![Cairn × Jev Lab — Before it becomes a memory](docs/media/repo-cover.png)
+
 **Test what your AI should remember.**
 
 [![Offline checks](https://github.com/Cairn-ink/cairn-jev-lab/actions/workflows/test.yml/badge.svg)](https://github.com/Cairn-ink/cairn-jev-lab/actions/workflows/test.yml)
@@ -38,9 +40,11 @@ You supply the source and candidate. The lab does not extract memories, rewrite 
 
 **[Explore the public lab](https://lab.cairn.ink)** — inspect the 100-case results and replay four recorded examples. No account or API key is required. Public visitors cannot submit new live evaluations; use your own TypeSafe key locally for those.
 
-![Recorded walkthrough: compare memory admission decisions](docs/media/recorded-demo.gif)
+![Animated walkthrough: source evidence, memory candidate and admission decisions](docs/media/lab-intro.gif)
 
-The walkthrough replays published results; it is not live inference or a speed demonstration.
+[Watch the 22-second MP4](docs/media/lab-intro.mp4) · [Original interface replay](docs/media/recorded-demo.gif) · [Remotion source](motion/README.md)
+
+The animated walkthrough explains published results; it is not live inference or a speed demonstration.
 
 ### How this relates to Cairn Memory
 

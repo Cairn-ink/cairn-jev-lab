@@ -1,6 +1,6 @@
 # Launch drafts
 
-Drafts only; not posted. Attach `docs/media/recorded-demo.gif`.
+Drafts only; not posted. Attach `docs/media/lab-intro.mp4` for the 22-second animated explanation, or `docs/media/lab-intro.gif` for an inline preview. `docs/media/repo-cover.png` is the static share card; `docs/media/lab-icon.png` is the project icon.
 
 ## X
 

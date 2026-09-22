@@ -1,0 +1,15 @@
+{
+  "name": "cairn-jev-lab-motion",
+  "private": true,
+  "scripts": {
+    "video": "remotion render src.jsx Lab ../docs/media/lab-intro.mp4",
+    "cover": "remotion still src.jsx Cover ../docs/media/repo-cover.png",
+    "icon": "remotion still src.jsx Icon ../docs/media/lab-icon.png"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.526",
+    "remotion": "4.0.526",
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
+  }
+}

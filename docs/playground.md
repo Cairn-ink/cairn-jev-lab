@@ -33,6 +33,8 @@ Neither result stores a memory. The baseline remains the library/CLI default, an
 
 ## Landing page and recorded-only distribution
 
+The public recorded-only demo is available at **https://lab.cairn.ink/**. See [deployment and update instructions](deployment.md). It uses Cloudflare Pages Direct Upload; repository pushes do not automatically publish a new site.
+
 The page starts with a compact study dashboard, then explains the three judgments and links to **Try it yourself**, the evidence and GitHub. Metrics come from `web/study.json`, generated from the [100-case coverage report](../evidence/coverage-en-v1/README.md). They describe 100 distinct synthetic cases evaluated once each; ad-hoc playground calls never change them. Latency includes network time. Labels were AI-authored and have not received independent human review. The previous 20-case, three-pass study remains separately published; its scores are not pooled with the new study.
 
 Rebuild published display data with `node scripts/build-study.mjs` (no API use). To repeat the 100-case suite with your own key, run `node --env-file=.env scripts/coverage.mjs --live` (up to 100 calls). A separate `node --env-file=.env scripts/repeat.mjs --live` makes up to 40 additional calls for the earlier repeatability protocol. Both write new ignored reports; neither overwrites published evidence. The four playground examples remain explicitly labeled original recorded cases, not samples from the new headline study.

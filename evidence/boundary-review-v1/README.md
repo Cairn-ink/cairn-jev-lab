@@ -1,6 +1,6 @@
 # Boundary review preparation
 
-**Prepared, awaiting human review. No model results or reviewed labels yet.**
+**Deferred. The review packet is prepared, but human review and model evaluation are paused. No model results or reviewed labels yet.**
 
 This follow-up investigates the skip/defer labeling overlap identified in the [100-case audit](../../docs/decision-boundary.md). It contains 20 new source/candidate pairs with controlled contrasts and intentionally unresolved cases. The cases are AI-authored, without an answer key.
 

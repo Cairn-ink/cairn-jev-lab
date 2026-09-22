@@ -5,7 +5,7 @@
 [![Offline checks](https://github.com/Cairn-ink/cairn-jev-lab/actions/workflows/test.yml/badge.svg)](https://github.com/Cairn-ink/cairn-jev-lab/actions/workflows/test.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-[Quick start](#quick-start) · [Bring your own cases](#try-your-own-cases) · [Policy](docs/policy.md) · [Results](evidence/pilot-2026-09-22/notes.md) · [Contributing](CONTRIBUTING.md) · [繁體中文](docs/zh-TW/README.md)
+[Public demo](https://lab.cairn.ink) · [Quick start](#quick-start) · [Bring your own cases](#try-your-own-cases) · [Policy](docs/policy.md) · [Results](evidence/coverage-en-v1/README.md) · [Contributing](CONTRIBUTING.md) · [繁體中文](docs/zh-TW/README.md)
 
 Cairn Jev Lab is an experimental memory admission evaluator. Give it a source passage and a proposed memory. Jev evaluates the evidence; a small, inspectable policy recommends **save**, **skip**, or **defer**.
 
@@ -22,9 +22,9 @@ A memory can sound plausible while changing what someone actually said:
 | “I prefer concise answers across conversations.” | “The user prefers concise answers.” | Save |
 | “Use English for this reply.” | “The user always prefers English.” | Skip |
 | “We might try PostgreSQL; nothing is decided.” | “The team adopted PostgreSQL.” | Skip |
-| “Let's do what we discussed earlier.” | “The user approved the original plan.” | Defer |
+| “Let's do what we discussed earlier.” | “The user approved the original plan.” | Skip: approval is not established |
 
-These are policy examples, not observed model outputs.
+These are policy examples, not observed model outputs. Defer means an unresolved assessment without a confident rejection; it does not excuse invented details. See the [boundary audit](docs/decision-boundary.md). Independent human review is deferred; the original experiment labels and scores remain unchanged.
 
 This project makes three things inspectable:
 
@@ -35,6 +35,16 @@ This project makes three things inspectable:
 You supply the source and candidate. The lab does not extract memories, rewrite text, store long-term memory, retrieve it, or delete it. A `save` result is a recommendation, not proof that a claim is true.
 
 ## Quick start
+
+**[Explore the public lab](https://lab.cairn.ink)** — inspect the 100-case results and replay four recorded examples. No account or API key is required. Public visitors cannot submit new live evaluations; use your own TypeSafe key locally for those.
+
+![Recorded walkthrough: compare memory admission decisions](docs/media/recorded-demo.gif)
+
+The walkthrough replays published results; it is not live inference or a speed demonstration.
+
+### How this relates to Cairn Memory
+
+[Cairn Memory](https://github.com/Cairn-ink/cairn-memory) is the memory project; this lab investigates the admission decision before storage. The current lab does not write to Cairn Memory. An integration would need an explicit adapter and validation before any production memory writes.
 
 Want a visual walkthrough? After cloning, run `node src/server.mjs` and open **http://127.0.0.1:4175/**. Four recorded cases need no key and make no API calls. To evaluate your own text, start with `node --env-file=.env src/server.mjs` instead. The key stays on the local server. See the [playground guide](docs/playground.md).
 

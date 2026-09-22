@@ -1,6 +1,6 @@
 # Research direction: memory admission before storage
 
-Our immediate research question is whether a typed decision model can reduce the latency and cost of source-grounded memory admission without unacceptable false saves or missed useful memories. The [comparison study](../evidence/comparison-v1/README.md) separates offline findings, planned live baselines and downstream QA.
+Our immediate research question is whether a typed decision model can reduce the latency and cost of source-grounded memory admission without unacceptable false saves or missed useful memories. The [completed Jev/Luna pilot](../evidence/comparison-openai-v1/README.md) now adds live model comparison and downstream QA to the [original offline comparison](../evidence/comparison-v1/README.md). Jev billing was not supplied, so the pilot does not establish a cost advantage.
 
 ## Related work
 
@@ -17,10 +17,12 @@ Our immediate research question is whether a typed decision model can reduce the
 
 TypeSafe [announced Jev on September 15, 2026](https://typesafe.ai/blog/introducing-system-one-models-and-jev). Memory admission has earlier research precedents; using Jev does not make the concept itself novel. The contribution we aim to build is a reproducible comparison with explicit labels, thresholds, failure modes and downstream consequences.
 
-## What the next experiment can establish
+## What the current evidence can establish
 
 1. **Within-suite policy tradeoffs:** same candidates, same expected labels, different admission rules. Historical replay already supports this narrow comparison.
-2. **A measured model comparison:** a live paired Jev/LLM run is needed before comparing their errors, response time or token usage. One small LLM is a baseline, not the entire model market. Generated confidence is not automatically calibrated.
-3. **A downstream mechanism check:** a fixed reader answers follow-up probes from the memories each policy admits. The initial exact-match multiple-choice pilot tests whether bad admissions propagate and missed admissions remove needed information. It does not establish general conversational benefit.
+2. **A measured model comparison:** the completed 100-case Jev/Luna run measures errors, response time and token usage on one connection and run. Jev's median was lower; Luna retained two more intended saves at .40. One low-latency LLM configuration is a baseline, not the entire model market. Generated confidence is not automatically calibrated.
+3. **A downstream mechanism check:** a fixed Luna reader answered 20 follow-up probes from the memories each policy admitted. Both .40 gates avoided save-all's ten wrong answers, but lost information still caused unanswered questions. These post-hoc selected multiple-choice probes do not establish general conversational benefit.
+
+The pilot suggests a focused next comparison: distinguish disposable status from useful, updateable project state. Luna rejected two follow-up-relevant project records as temporary despite recognizing their source support. Candidate admission alone cannot restore a correct fact after rejecting an inaccurate candidate; rewriting or requesting clarification needs its own controlled experiment.
 
 The original ten defer labels remain disputed. Main results preserve them; sensitivity analysis excludes that class transparently rather than assigning convenient new labels. A larger independent evaluation would need independently authored cases, label adjudication, distinct development and test sets, confidence intervals, repeated calls, richer multi-memory sessions and downstream tasks with meaningful utility costs.

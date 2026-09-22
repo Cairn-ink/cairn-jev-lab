@@ -7,13 +7,13 @@
 [![Offline checks](https://github.com/Cairn-ink/cairn-jev-lab/actions/workflows/test.yml/badge.svg)](https://github.com/Cairn-ink/cairn-jev-lab/actions/workflows/test.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-[Public demo](https://lab.cairn.ink) · [Quick start](#quick-start) · [Bring your own cases](#try-your-own-cases) · [Policy](docs/policy.md) · [Results](evidence/coverage-en-v1/README.md) · [Contributing](CONTRIBUTING.md) · [繁體中文](docs/zh-TW/README.md)
+[Public demo](https://lab.cairn.ink) · [Quick start](#quick-start) · [Bring your own cases](#try-your-own-cases) · [Policy](docs/policy.md) · [Jev vs Luna results](evidence/comparison-openai-v1/README.md) · [Contributing](CONTRIBUTING.md) · [繁體中文](docs/zh-TW/README.md)
 
 Cairn Jev Lab is an experimental memory admission evaluator. Give it a source passage and a proposed memory. Jev evaluates the evidence; a small, inspectable policy recommends **save**, **skip**, or **defer**.
 
 Use it to test a memory policy before letting it decide what an agent keeps. The lab includes editable cases, a reusable JavaScript entry point, and reports that retain both successful judgments and mistakes. Node.js 22+, no runtime dependencies.
 
-> **Developer preview.** On 100 new synthetic English cases, the baseline matched 59 expected decisions; the preview matched 78 using the same responses. Preview still missed 12 of 50 intended saves and skipped all 10 cases labeled defer. Labels were AI-authored without independent human review. This is an experiment, not a production quality claim.
+> **Developer preview.** A paired Jev/Luna study now covers 100 synthetic admission cases and 20 follow-up questions. At threshold .40, Jev saved 39/50 intended memories and Luna saved 41/50; both observed zero false saves among 50 non-save labels. Labels were AI-authored without independent human review. This is an experiment, not a production quality claim.
 
 ## Why this exists
 
@@ -140,7 +140,24 @@ The `admission-v1` policy uses a provisional confidence threshold of `0.75`. A c
 
 ## What we have measured
 
-### Latest: 100 distinct English cases
+### Latest: Jev / Luna admission and follow-up answers
+
+We completed **260 live calls**: 100 Jev judgments, 100 Luna judgments and 60 Luna reader calls shared across 20 follow-up questions. Luna uses `gpt-5.6-luna` with reasoning effort `none`; both gates use the same three criteria.
+
+| On the same 100 cases | Jev at .40 | Luna at .40 |
+|---|---:|---:|
+| Intended memories saved | 39 / 50 | 41 / 50 |
+| False saves among non-save labels | 0 / 50 | 0 / 50 |
+| Deferred | 8 | 0 |
+| Median gate latency | 250 ms | 1,593 ms |
+
+In the 20 follow-ups, save-all caused 10 wrong answers. Both .40 gates avoided those wrong answers, but Jev left eight answerable questions unanswered and Luna left ten. The reader, questions and options stayed fixed. This selected, AI-authored pilot exposes the tradeoff between rejecting bad memories and retaining useful ones; it does not establish a general model ranking. Thresholds are not calibration-equivalent and latency includes network time.
+
+[Full report and figures](evidence/comparison-openai-v1/README.md) · [Frozen protocol](evidence/comparison-openai-v1/PROTOCOL.md) · [Exact requests and results](evidence/comparison-openai-v1/report.json)
+
+Audit the evidence with `node scripts/verify-openai-evidence.mjs` (no calls). To repeat, set `TYPESAFE_API_KEY` and `OPENAI_API_KEY` locally and run `node --env-file=.env scripts/compare-openai.mjs --live` (maximum 260 calls, no automatic retries). The public demo continues to show the separate original Jev-only study below.
+
+### Original 100-case English study
 
 We froze 100 new source/candidate pairs, labels and the evaluation protocol before calls. Five categories cover preferences and scope, speaker attribution, proposals and decisions, conditions and uncertainty, and corrections. Every case was evaluated once with unchanged questions and policies.
 
@@ -218,7 +235,7 @@ The memory-gate idea was inspired by [jev-memory](https://github.com/NicolasMont
 
 ## What comes next
 
-**The comparative study is now underway:** [baseline results, threshold tradeoffs and the downstream protocol](evidence/comparison-v1/README.md). Completed tables reuse the original 100 Jev responses; live LLM and reader outcomes are reported separately when measured. [Research context](docs/research-directions.md) connects the design to earlier work on memory admission.
+**The first live comparative pilot is complete:** [Jev/Luna judgments, latency and follow-up answers](evidence/comparison-openai-v1/README.md). The [earlier offline baseline analysis](evidence/comparison-v1/README.md) remains separate. Our next experiments will examine useful, updateable project state and independently authored cases. [Research context](docs/research-directions.md) connects the findings to earlier work on memory admission.
 
 The first 100 cases surfaced a useful research question: **when should a memory gate reject a claim, and when should it ask for more evidence?** Our next phase turns that question into testable comparisons:
 

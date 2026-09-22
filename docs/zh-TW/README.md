@@ -25,7 +25,7 @@ node --test
 node src/cli.mjs
 ```
 
-預覽會檢查並列出 20 個英文開發案例，不需要 key，也不呼叫 API。`expected` 是預先寫好的人工預期，並非模型輸出。
+預覽會檢查並列出 20 個英文開發案例，不需要 key，也不呼叫 API。`expected` 是案例的預期標籤，本研究由 AI 協助編寫，並非受測模型的輸出。
 
 將 `.env.example` 複製為 `.env`，在本機填入 `TYPESAFE_API_KEY`，即可執行：
 
@@ -64,7 +64,11 @@ node --env-file=.env src/cli.mjs --live --input examples/my-cases.json
 
 ## 下一階段
 
-已新增[比較研究與判斷取捨圖](../../evidence/comparison-v1/README.md)：先以原始 100 題回應完成「全部保存、簡單文字規則、Jev 兩組門檻」的離線比較，並準備 20 題後續回答測試。一般 LLM 的對照與後續回答結果，會在實際呼叫完成後另行發布，不與歷史回放混算。[研究脈絡](../research-directions.md)。
+已完成 [Jev／Luna 實測與後續回答比較](../../evidence/comparison-openai-v1/README.md)：100 次 Jev、100 次 Luna 記憶判斷，加上 60 次 Luna 回答，對應 20 題後續問題。Luna 使用 `gpt-5.6-luna`、不額外推理；兩者使用相同的三項標準。
+
+在 0.40 門檻下，Jev 保存 39／50 筆應保存內容，Luna 保存 41／50 筆，兩者在 50 筆不應保存案例中都未觀察到誤收。判斷中位時間分別為 250 ms 與 1,593 ms，包含網路時間。後續 20 題中，全部保存造成 10 次錯答；兩種模型的 0.40 門檻都避免了錯答，但 Jev 仍有 8 題、Luna 有 10 題因缺少資訊而答不出來。這組後續題目是看過歷史 Jev 結果後選出的 AI 編寫案例，不能當成獨立評測或模型整體排名。
+
+`node scripts/verify-openai-evidence.mjs` 可在不呼叫 API 的情況下重算全部分數。若要重新實測，在本機 `.env` 放入 `TYPESAFE_API_KEY` 和 `OPENAI_API_KEY`，執行 `node --env-file=.env scripts/compare-openai.mjs --live`。最多 260 次呼叫，遇到錯誤即停止，不自動重試。[原始離線比較](../../evidence/comparison-v1/README.md)與舊資料保留不變；公開展示頁仍呈現原本的 Jev 100 題研究。[研究脈絡](../research-directions.md)。
 
 接下來聚焦三件事：用已準備好的 20 個對照案例釐清「略過／待定」邊界，規劃先獨立盲評再測模型；加入社群提供的合成案例，比較說話者歸屬、長期用途與不同規則的取捨；探索 Cairn Memory 的選用式介接，從只產生建議、不寫入記憶的模式開始。這些是後續研究方向，尚非已完成的成果。歡迎提供能挑戰現有規則的案例。[完整英文計畫](../../README.md#what-comes-next)。
 

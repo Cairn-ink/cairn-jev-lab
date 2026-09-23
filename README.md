@@ -46,10 +46,6 @@ The [public lab](https://lab.cairn.ink/) is recorded-only: visitors cannot submi
 
 ![Animated walkthrough: source evidence, memory candidate and admission decisions](docs/media/lab-intro.gif)
 
-[Watch the 22-second MP4](docs/media/lab-intro.mp4) · [Original interface replay](docs/media/recorded-demo.gif) · [Remotion source](motion/README.md)
-
-The animated walkthrough explains published results; it is not live inference or a speed demonstration.
-
 ### How this relates to Cairn Memory
 
 [Cairn Memory](https://github.com/Cairn-ink/cairn-memory) is the memory project; this lab investigates the admission decision before storage. The current lab does not write to Cairn Memory. An integration would need an explicit adapter and validation before any production memory writes.

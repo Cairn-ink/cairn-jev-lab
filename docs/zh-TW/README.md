@@ -2,13 +2,13 @@
 
 **測試你的 AI 應該記住什麼。**
 
-### [線上體驗 → lab.cairn.ink](https://lab.cairn.ink/)
+### [線上體驗 → lab.cairn.ink](https://lab.cairn.ink/?lang=zh-TW)
 
 瀏覽已發布的結果、重播已記錄的案例。不必安裝、不用帳號，也不需要 API key。
 
-[![Cairn × Jev Lab：Before it becomes a memory](../media/repo-cover.png)](https://lab.cairn.ink/)
+[![Cairn × Jev Lab：Before it becomes a memory](../media/repo-cover.png)](https://lab.cairn.ink/?lang=zh-TW)
 
-[公開展示](https://lab.cairn.ink/) · [English / 主要文件](../../README.md) · [首次實測中文解讀](pilot-2026-09-22.md)
+[公開展示](https://lab.cairn.ink/?lang=zh-TW) · [English / 主要文件](../../README.md) · [首次實測中文解讀](pilot-2026-09-22.md)
 
 這是一個實驗性的記憶收錄評估工具。輸入原文與候選記憶，Jev 評估證據，程式依據明確規則回傳「保存、略過、待定」。適合讓開發者在交給 agent 自動記憶之前，先測試自己的標準。
 

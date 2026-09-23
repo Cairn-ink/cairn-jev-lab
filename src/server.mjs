@@ -8,6 +8,7 @@ import { buildRequest, decide, policy, previewPolicy } from './gate.mjs';
 const root = new URL('../', import.meta.url);
 const assets = new Map([
   ['/', ['web/index.html', 'text/html; charset=utf-8']],
+  ['/i18n.js', ['web/i18n.js', 'text/javascript; charset=utf-8']],
   ['/app.js', ['web/app.js', 'text/javascript; charset=utf-8']],
   ['/dashboard.js', ['web/dashboard.js', 'text/javascript; charset=utf-8']],
   ['/study.json', ['web/study.json', 'application/json; charset=utf-8']],
@@ -49,8 +50,10 @@ export async function createLabServer({ apiKey = process.env.TYPESAFE_API_KEY, m
       if (req.method === 'GET' && req.url === '/api/status')
         return json(200, { configured, model, token, attempted, remaining: Math.max(0, maxCalls - attempted), maxCalls });
       if (req.method === 'GET' && req.url === '/api/examples') return json(200, examples);
-      if (req.method === 'GET' && assets.has(req.url)) {
-        const [file, type] = assets.get(req.url);
+      // Static pages ignore query strings such as ?lang=zh-TW; API routes above still match exactly.
+      const pathname = req.url.split('?')[0];
+      if (req.method === 'GET' && assets.has(pathname)) {
+        const [file, type] = assets.get(pathname);
         const body = await readFile(new URL(file, root));
         res.writeHead(200, { 'Content-Type': type }); return res.end(body);
       }

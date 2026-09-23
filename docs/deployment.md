@@ -10,7 +10,9 @@ The deployment contains static HTML, CSS, JavaScript, recorded JSON results, sel
 
 ## Updating the site
 
-GitHub pushes do **not** automatically deploy this Direct Upload project. After checking changes, package the contents of `web/` with `index.html` at the archive root. In Cloudflare Pages, choose `cairn-jev-lab` → Create deployment → Production, upload the archive and deploy. Never upload the repository root or `.env` files. Verify the headline metrics, recorded examples and disabled live evaluation on the public hostname.
+GitHub pushes do **not** automatically deploy this Direct Upload project. After checking changes, package the contents of `web/` with `index.html` at the archive root. In Cloudflare Pages, choose `cairn-jev-lab` → Create deployment → Production, upload the archive and deploy. Alternatively, after `npx wrangler@4 login`, run `npx wrangler@4 pages deploy web --project-name cairn-jev-lab --branch main` from the repository root; `main` is the production branch. Never upload the repository root or `.env` files. Verify the headline metrics, recorded examples and disabled live evaluation on the public hostname.
+
+Cloudflare Web Analytics is enabled for the hostname and injects its beacon at the edge. `web/_headers` therefore allows scripts from `https://static.cloudflareinsights.com` and beacon reports to `https://cloudflareinsights.com`; remove both if analytics is turned off.
 
 The main `cairn.ink` site continues to use its existing Railway destination. This deployment only adds the `lab` subdomain.
 

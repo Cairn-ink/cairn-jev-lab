@@ -1,13 +1,17 @@
 # Cairn Jev Lab
 
-![Cairn × Jev Lab — Before it becomes a memory](docs/media/repo-cover.png)
-
 **Test what your AI should remember.**
+
+### [Explore the lab → lab.cairn.ink](https://lab.cairn.ink/)
+
+Browse published results and replay recorded examples. No setup, account, or API key needed.
+
+[![Cairn × Jev Lab: Before it becomes a memory](docs/media/repo-cover.png)](https://lab.cairn.ink/)
 
 [![Offline checks](https://github.com/Cairn-ink/cairn-jev-lab/actions/workflows/test.yml/badge.svg)](https://github.com/Cairn-ink/cairn-jev-lab/actions/workflows/test.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-[Public demo](https://lab.cairn.ink) · [Quick start](#quick-start) · [Bring your own cases](#try-your-own-cases) · [Policy](docs/policy.md) · [Jev vs Luna results](evidence/comparison-openai-v1/README.md) · [Contributing](CONTRIBUTING.md) · [繁體中文](docs/zh-TW/README.md)
+[Public demo](https://lab.cairn.ink/) · [Quick start](#quick-start) · [Bring your own cases](#try-your-own-cases) · [Policy](docs/policy.md) · [Jev vs Luna results](evidence/comparison-openai-v1/README.md) · [Contributing](CONTRIBUTING.md) · [繁體中文](docs/zh-TW/README.md)
 
 Cairn Jev Lab is an experimental memory admission evaluator. Give it a source passage and a proposed memory. Jev evaluates the evidence; a small, inspectable policy recommends **save**, **skip**, or **defer**.
 
@@ -38,7 +42,7 @@ You supply the source and candidate. The lab does not extract memories, rewrite 
 
 ## Quick start
 
-**[Explore the public lab](https://lab.cairn.ink)** — inspect the 100-case results and replay four recorded examples. No account or API key is required. Public visitors cannot submit new live evaluations; use your own TypeSafe key locally for those.
+The [public lab](https://lab.cairn.ink/) is recorded-only: visitors cannot submit new live evaluations. To test your own text, run the lab locally with your own TypeSafe key.
 
 ![Animated walkthrough: source evidence, memory candidate and admission decisions](docs/media/lab-intro.gif)
 

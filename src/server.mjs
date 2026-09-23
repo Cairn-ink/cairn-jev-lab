@@ -14,7 +14,9 @@ const assets = new Map([
   ['/examples.json', ['web/examples.json', 'application/json; charset=utf-8']],
   ['/fonts/eb-garamond.ttf', ['web/fonts/eb-garamond.ttf', 'font/ttf']],
   ['/fonts/inter.ttf', ['web/fonts/inter.ttf', 'font/ttf']],
-  ['/style.css', ['web/style.css', 'text/css; charset=utf-8']]
+  ['/style.css', ['web/style.css', 'text/css; charset=utf-8']],
+  ['/og-image.png', ['web/og-image.png', 'image/png']],
+  ['/icon.png', ['web/icon.png', 'image/png']]
 ]);
 const errorCode = error => /^(invalid_case|invalid_answers|network_or_timeout|invalid_provider_response|provider_http_\d{3})$/.test(error.message)
   ? error.message : 'evaluation_failed';
